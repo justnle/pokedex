@@ -23,25 +23,32 @@ const Card = (props: any) => {
         };
 
         callApi();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log(`pokemon information here`);
-    console.log(pokemonInfo);
-
     return (
-        <div>
+        <div className="pokemon-card">
             <img
                 src={
                     pokemonInfo[`sprites`][`other`][`official-artwork`][
                         `front_default`
                     ]
                 }
+                alt={pokemonInfo[`name`]}
             />
             <b>
                 {pokemonInfo[`order`].toString().padStart(3, '0')}{' '}
                 {pokemonInfo[`name`].charAt(0).toUpperCase() +
                     props.name.slice(1)}
             </b>
+            {pokemonInfo[`types`].map((types: any, index: number) => {
+                return (
+                    <div key={`${pokemonInfo[`name`]}-type-${index}`}>
+                        {types.type.name.charAt(0).toUpperCase() +
+                            types.type.name.slice(1)}
+                    </div>
+                );
+            })}
         </div>
     );
 };
