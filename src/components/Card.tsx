@@ -26,11 +26,14 @@ const Card = (props: any) => {
     }, []);
 
     const pokemonType = pokemonInfo[`types`][0][`type`][`name`];
-    const color = typeColor[pokemonType];
 
     return (
         <div className="pokemon-card rounded shadow-lg overflow-hidden">
-            <div className="pokemon-image" style={{ backgroundColor: color }}>
+            {/* need to make backgroundColor opacity 70% */}
+            <div
+                className="pokemon-image"
+                style={{ backgroundColor: typeColor[pokemonType] }}
+            >
                 <img
                     src={
                         pokemonInfo[`sprites`][`other`][`official-artwork`][
@@ -38,17 +41,18 @@ const Card = (props: any) => {
                         ]
                     }
                     alt={pokemonInfo[`name`]}
+                    className="h-40 w-40 mx-auto"
                 />
             </div>
             <div className="pokemon-info flex flex-col">
-                <div className="pokemon-name flex self-stretch text-2xl">
+                <div className="pokemon-name flex self-stretch text-[28px] text-dark-gray">
                     <b>
                         #{pokemonInfo[`order`].toString().padStart(3, '0')}{' '}
                         {pokemonInfo[`name`].charAt(0).toUpperCase() +
                             props.name.slice(1)}
                     </b>
                 </div>
-                <div className="pokemon-type flex flex-row self-stretch text-xl">
+                <div className="pokemon-type flex flex-row self-stretch text-[24px] text-medium-gray">
                     {pokemonInfo[`types`].map((types: any, index: number) => {
                         return (
                             <div key={`${pokemonInfo[`name`]}-type-${index}`}>
