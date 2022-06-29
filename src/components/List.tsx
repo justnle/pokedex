@@ -41,7 +41,7 @@ export default function List({ useCache }: { useCache?: boolean }) {
                     (pokemonList: Pokemon, index: number) => {
                         return (
                             <Card
-                                key={index}
+                                key={`${pokemonList.name}-${index}`}
                                 {...pokemonList}
                                 url={pokemonList.url}
                                 useCache={true}
