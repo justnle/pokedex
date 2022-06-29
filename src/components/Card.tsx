@@ -29,7 +29,7 @@ const Card = (props: any) => {
     const color = typeColor[pokemonType];
 
     return (
-        <div className="pokemon-card rounded-lg shadow-lg">
+        <div className="pokemon-card rounded shadow-lg overflow-hidden">
             <div className="pokemon-image" style={{ backgroundColor: color }}>
                 <img
                     src={
@@ -41,14 +41,14 @@ const Card = (props: any) => {
                 />
             </div>
             <div className="pokemon-info flex flex-col">
-                <div className="pokemon-name flex self-stretch">
+                <div className="pokemon-name flex self-stretch text-2xl">
                     <b>
                         #{pokemonInfo[`order`].toString().padStart(3, '0')}{' '}
                         {pokemonInfo[`name`].charAt(0).toUpperCase() +
                             props.name.slice(1)}
                     </b>
                 </div>
-                <div className="pokemon-type flex flex-row self-stretch">
+                <div className="pokemon-type flex flex-row self-stretch text-xl">
                     {pokemonInfo[`types`].map((types: any, index: number) => {
                         return (
                             <div key={`${pokemonInfo[`name`]}-type-${index}`}>
