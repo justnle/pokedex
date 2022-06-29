@@ -6,7 +6,7 @@ const writeToCache = (url: string, data: Object) => {
 
 const readFromCache = (url: string) => {
     const data = localStorage.getItem(url);
-    console.log(`reading from cache`);
+    // console.log(`reading from cache`);
 
     return data ? JSON.parse(data) : null;
 };
