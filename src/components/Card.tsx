@@ -35,7 +35,7 @@ const Card = (props: any) => {
     const color = typeColor[pokemonType];
 
     return (
-        <div className="pokemon-card rounded shadow-lg overflow-hidden">
+        <div className="pokemon-card rounded-[20px] shadow-lg overflow-hidden">
             <div className="pokemon-image" style={{ backgroundColor: color }}>
                 <img
                     src={
