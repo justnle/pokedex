@@ -1,6 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, CSSProperties } from 'react';
 import { getCachedPokemonData, getPokemonData } from '../utils/request';
 import { typeColor } from '../utils/backgrounds';
+
+const cardStyle = {
+    padding: '8px 8px 16px 16px'
+};
 
 const Card = (props: any) => {
     const [pokemonInfo, setPokemonInfo] = useState<Array<Object>>([]);
@@ -26,14 +30,11 @@ const Card = (props: any) => {
     }, []);
 
     const pokemonType = pokemonInfo[`types`][0][`type`][`name`];
+    const color = typeColor[pokemonType];
 
     return (
         <div className="pokemon-card rounded shadow-lg overflow-hidden">
-            {/* need to make backgroundColor opacity 70% */}
-            <div
-                className="pokemon-image"
-                style={{ backgroundColor: typeColor[pokemonType] }}
-            >
+            <div className="pokemon-image" style={{ backgroundColor: color }}>
                 <img
                     src={
                         pokemonInfo[`sprites`][`other`][`official-artwork`][
@@ -44,7 +45,10 @@ const Card = (props: any) => {
                     className="h-40 w-40 mx-auto"
                 />
             </div>
-            <div className="pokemon-info flex flex-col">
+            <div
+                className="pokemon-info flex flex-col items-start"
+                style={cardStyle}
+            >
                 <div className="pokemon-name flex self-stretch text-[28px] text-dark-gray">
                     <b>
                         #{pokemonInfo[`order`].toString().padStart(3, '0')}{' '}
