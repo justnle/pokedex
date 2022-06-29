@@ -1,11 +1,11 @@
 import React from 'react';
-import Cards from './components/Cards';
+import List from './components/List';
 import './App.css';
 
 function App() {
     return (
         <div className="App">
-            <Cards />
+            <List useCache={true} />
         </div>
     );
 }
