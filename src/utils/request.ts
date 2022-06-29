@@ -1,23 +1,16 @@
 import axios from 'axios';
 import { readFromCache, writeToCache } from './cache';
 
-const API_URL = `https://pokeapi.co/api/v2/pokemon?limit=12&offset=0`;
+const getPokemonData = async (url: string, cacheResponse = false) => {
+    return await axios.get(url).then((res) => {
+        console.log(`making api call`);
 
-// export async function getPokemon() {
-//     return await axios.get(API).then((res) => {
-//         return res.data;
-//     });
-// }
+        cacheResponse && writeToCache(url, res.data);
 
-const getPokemon = async (cacheResponse = false) => {
-    const { data } = await axios.get(API_URL);
-    console.log(`making api call`);
-
-    cacheResponse && writeToCache(API_URL, data);
-
-    return data;
+        return res.data;
+    });
 };
 
-const getCachedPokemon = () => readFromCache(API_URL);
+const getCachedPokemonData = (url: string) => readFromCache(url);
 
-export { getPokemon, getCachedPokemon };
+export { getCachedPokemonData, getPokemonData };
