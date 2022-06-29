@@ -7,7 +7,9 @@ const cardStyle = {
 };
 
 const Card = (props: any) => {
-    const [pokemonInfo, setPokemonInfo] = useState<Array<Object>>([]);
+    const [pokemonInfo, setPokemonInfo] = useState<Array<Object>>(
+        getCachedPokemonData(props.url) || []
+    );
 
     useEffect(() => {
         const callApi = async () => {

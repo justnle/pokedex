@@ -9,8 +9,10 @@ interface Pokemon {
 
 const LIST_URL = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=0`;
 
-export default function List({ useCache }: { useCache?: boolean }) {
-    const [pokemonList, setPokemonList] = useState<Array<Object>>([]);
+export default function List({ useCache }: { useCache: boolean }) {
+    const [pokemonList, setPokemonList] = useState<Array<Object>>(
+        getCachedPokemonData(LIST_URL) || []
+    );
 
     useEffect(() => {
         const callApi = async () => {
@@ -26,8 +28,6 @@ export default function List({ useCache }: { useCache?: boolean }) {
                 const callPokemon = await getPokemonData(LIST_URL, useCache);
                 setPokemonList(callPokemon);
             }
-            // const callPokemon = await getPokemonData(LIST_URL, useCache);
-            // setPokemonList(callPokemon);
         };
 
         callApi();
