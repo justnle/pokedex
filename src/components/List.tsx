@@ -36,7 +36,7 @@ export default function List({ useCache }: { useCache?: boolean }) {
 
     return (
         <div className="container mx-auto">
-            <div className="grid grid-cols-5 gap-4">
+            <div className="grid grid-cols-4 gap-4">
                 {pokemonList[`results`].map(
                     (pokemonList: Pokemon, index: number) => {
                         return (
