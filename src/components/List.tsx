@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getCachedPokemonData, getPokemonData } from '../utils/request';
 import Card from './Card';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 interface Pokemon {
     name: string;
@@ -34,22 +35,47 @@ export default function List({ useCache }: { useCache: boolean }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // console.log(pokemonList[`results`].length);
+
     return (
         <div className="list">
-            <div className="grid grid-cols-4 gap-4">
-                {pokemonList[`results`].map(
-                    (pokemonList: Pokemon, index: number) => {
-                        return (
-                            <Card
-                                key={`${pokemonList.name}-${index}`}
-                                {...pokemonList}
-                                url={pokemonList.url}
-                                useCache={true}
-                            />
-                        );
-                    }
-                )}
-            </div>
+            <InfiniteScroll
+                dataLength={pokemonList[`results`].length}
+                next={async () => {
+                    const newPokemon = await getPokemonData(
+                        pokemonList[`next`],
+                        useCache
+                    );
+
+                    // console.log(`old`);
+                    // console.log(pokemonList[`results`]);
+                    // console.log(`new`);
+                    // console.log(newPokemon[`results`]);
+
+                    setPokemonList(
+                        pokemonList[`results`].concat(newPokemon[`results`])
+                    );
+
+                    console.log(pokemonList[`results`]);
+                }}
+                hasMore={true}
+                loader={<h4>Loading...</h4>}
+            >
+                <div className="grid grid-cols-4 gap-4">
+                    {pokemonList[`results`].map(
+                        (pokemon: Pokemon, index: number) => {
+                            return (
+                                <Card
+                                    key={`${pokemon.name}-${index}`}
+                                    {...pokemon}
+                                    url={pokemon.url}
+                                    useCache={true}
+                                />
+                            );
+                        }
+                    )}
+                </div>
+            </InfiniteScroll>
         </div>
     );
 }
