@@ -6,8 +6,7 @@ export default function List(props: any) {
 
     useEffect(() => {
         setPokemonList(props.pokemonList);
-        // console.log(pokemonList);
-    });
+    }, [props.pokemonList]);
 
     return (
         <div className="list">
