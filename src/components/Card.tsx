@@ -33,9 +33,6 @@ const Card = (props: any) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // const pokemonType = pokemonInfo[`types`][0][`type`][`name`];
-    // const color = typeColor[pokemonType];
-
     return (
         <div className="pokemon-card">
             {pokemonInfo.length === 0 ? (
@@ -50,7 +47,12 @@ const Card = (props: any) => {
                 <div className="rounded-[20px] shadow-lg overflow-hidden">
                     <div
                         className="pokemon-image"
-                        style={{ backgroundColor: `black` }}
+                        style={{
+                            backgroundColor:
+                                typeColor[
+                                    pokemonInfo[`types`][0][`type`][`name`]
+                                ]
+                        }}
                     >
                         <img
                             src={
