@@ -13,7 +13,7 @@ export default function List(props: any) {
         <div className="list">
             <div className="grid grid-cols-4 gap-4">
                 {!pokemonList ? (
-                    <div>No List to Render</div>
+                    <div>No Pokemon List to Render</div>
                 ) : (
                     pokemonList.map((pokemon: any, index: number) => {
                         return (
