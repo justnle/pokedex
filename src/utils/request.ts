@@ -11,7 +11,6 @@ const getPokemonData = async (url: string, cacheResponse = false) => {
     } else {
         return await axios.get(url).then((res) => {
             console.log(`making api call`);
-            console.log(cacheResponse);
 
             cacheResponse && writeToCache(url, res.data);
 
