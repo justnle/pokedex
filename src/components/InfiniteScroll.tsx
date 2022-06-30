@@ -31,6 +31,7 @@ export default function Scroll({ useCache }: { useCache: boolean }) {
         };
 
         getData(API_URL_FIRST_20);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const updatePokemonList = async () => {
