@@ -2,13 +2,21 @@ import axios from 'axios';
 import { readFromCache, writeToCache } from './cache';
 
 const getPokemonData = async (url: string, cacheResponse = false) => {
-    return await axios.get(url).then((res) => {
-        console.log(`making api call`);
+    if (cacheResponse) {
+        const cachedData = getCachedPokemonData(url);
 
-        cacheResponse && writeToCache(url, res.data);
+        if (cachedData) {
+            return cachedData;
+        }
+    } else {
+        return await axios.get(url).then((res) => {
+            console.log(`making api call`);
 
-        return res.data;
-    });
+            cacheResponse && writeToCache(url, res.data);
+
+            return res.data;
+        });
+    }
 };
 
 const getCachedPokemonData = (url: string) => readFromCache(url);
