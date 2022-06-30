@@ -17,13 +17,11 @@ export default function List(props: any) {
                 ) : (
                     pokemonList.map((pokemon: any, index: number) => {
                         return (
-                            <div>
-                                <Card
-                                    key={`${pokemon[`name`]}-${index}`}
-                                    {...pokemon}
-                                    useCache={false}
-                                />
-                            </div>
+                            <Card
+                                key={`${pokemon[`name`]}-${index}`}
+                                {...pokemon}
+                                useCache={false}
+                            />
                         );
                     })
                 )}
