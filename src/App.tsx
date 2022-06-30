@@ -1,13 +1,13 @@
 import React from 'react';
 import Header from './components/Header';
-import InfiniteScroll from './components/InfiniteScroll';
+import Scroller from './components/Scroller';
 import './App.css';
 
 function App() {
     return (
         <div className="App container mx-auto">
             <Header />
-            <InfiniteScroll useCache={true} />
+            <Scroller useCache={true} />
         </div>
     );
 }
