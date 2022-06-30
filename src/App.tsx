@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
 import Home from './pages/Home';
+import Captured from './pages/Captured';
 import './App.css';
 
 function App() {
     return (
-        <div className="App container mx-auto">
-            <Home />
-        </div>
+        <Router>
+            <div className="App container mx-auto">
+                <Header />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/captured" element={<Captured />} />
+                </Routes>
+            </div>
+        </Router>
     );
 }
 
