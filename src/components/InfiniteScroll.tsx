@@ -3,20 +3,21 @@ import { getCachedPokemonData, getPokemonData } from '../utils/request';
 import List from './List';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-const LIST_URL = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=0`;
+const API_URL_FIRST_20 = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=0`;
 
 export default function Scroll({ useCache }: { useCache: boolean }) {
     const [pokemonList, setPokemonList] = useState<Array<Object>>(
-        getCachedPokemonData(LIST_URL)[`results`] || []
+        getCachedPokemonData(API_URL_FIRST_20)[`results`] || []
     );
     const [nextPokemonList, setNextPokemonList] = useState<Array<Object>>(
-        getCachedPokemonData(LIST_URL)[`next`] || []
+        getCachedPokemonData(API_URL_FIRST_20)[`next`] || []
     );
 
     useEffect(() => {
         const getData = async (url: string) => {
             if (useCache) {
-                const cachedPokemonList = getCachedPokemonData(LIST_URL);
+                const cachedPokemonList =
+                    getCachedPokemonData(API_URL_FIRST_20);
 
                 if (cachedPokemonList) {
                     setPokemonList(cachedPokemonList[`results`]);
@@ -29,7 +30,7 @@ export default function Scroll({ useCache }: { useCache: boolean }) {
             }
         };
 
-        getData(LIST_URL);
+        getData(API_URL_FIRST_20);
     }, []);
 
     const updatePokemonList = async () => {
