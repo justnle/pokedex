@@ -1,53 +1,28 @@
-import { useState, useEffect } from 'react';
-import { getCachedPokemonData, getPokemonData } from '../utils/request';
+import { useEffect, useState } from 'react';
 import Card from './Card';
 
-interface Pokemon {
-    name: string;
-    url: string;
-}
-
-const LIST_URL = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=0`;
-
-export default function List({ useCache }: { useCache: boolean }) {
-    const [pokemonList, setPokemonList] = useState<Array<Object>>(
-        getCachedPokemonData(LIST_URL) || []
-    );
+export default function List(props: any) {
+    const [pokemonList, setPokemonList] = useState<Array<Object>>([]);
 
     useEffect(() => {
-        const callApi = async () => {
-            setPokemonList([]);
-
-            if (useCache) {
-                const cachedPokemonList = getCachedPokemonData(LIST_URL);
-
-                if (cachedPokemonList) {
-                    setPokemonList(cachedPokemonList);
-                }
-            } else {
-                const callPokemon = await getPokemonData(LIST_URL, useCache);
-                setPokemonList(callPokemon);
-            }
-        };
-
-        callApi();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        setPokemonList(props.pokemonList);
+    }, [props.pokemonList]);
 
     return (
         <div className="list">
             <div className="grid grid-cols-4 gap-4">
-                {pokemonList[`results`].map(
-                    (pokemonList: Pokemon, index: number) => {
+                {!pokemonList ? (
+                    <div>No Pokemon List to Render</div>
+                ) : (
+                    pokemonList.map((pokemon: any, index: number) => {
                         return (
                             <Card
-                                key={`${pokemonList.name}-${index}`}
-                                {...pokemonList}
-                                url={pokemonList.url}
-                                useCache={true}
+                                key={`${pokemon[`name`]}-${index}`}
+                                {...pokemon}
+                                useCache={false}
                             />
                         );
-                    }
+                    })
                 )}
             </div>
         </div>
