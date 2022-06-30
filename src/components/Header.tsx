@@ -1,4 +1,3 @@
-import { isAbsolute } from 'node:path/win32';
 import pokedexLogo from '../assets/pokedex_logo.png';
 import pokeball from '../assets/pokeball.png';
 
