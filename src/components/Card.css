@@ -1,3 +1,9 @@
+/* name and type padding */
+.pokemon-info {
+    padding: 8px 8px 16px 16px;
+}
+
+/* dot between pokemon types */
 .type-1:before {
     content: '\a0\00B7\a0';
 }

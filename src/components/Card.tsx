@@ -3,10 +3,6 @@ import { getCachedPokemonData, getPokemonData } from '../utils/request';
 import { typeColor } from '../utils/backgrounds';
 import './Card.css';
 
-const cardStyle = {
-    padding: '8px 8px 16px 16px'
-};
-
 const Card = (props: any) => {
     const [pokemonInfo, setPokemonInfo] = useState<Array<Object>>(
         getCachedPokemonData(props.url) || []
@@ -65,10 +61,7 @@ const Card = (props: any) => {
                             className="h-40 w-40 mx-auto"
                         />
                     </div>
-                    <div
-                        className="pokemon-info flex flex-col items-start"
-                        style={cardStyle}
-                    >
+                    <div className="pokemon-info flex flex-col items-start">
                         <div className="pokemon-name flex self-stretch text-[28px] text-dark-gray">
                             <b>
                                 #
