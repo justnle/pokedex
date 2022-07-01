@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getCachedPokemonData, getPokemonData } from '../utils/request';
 import { typeColor } from '../utils/backgrounds';
+import './Card.css';
 
 const cardStyle = {
     padding: '8px 8px 16px 16px'
@@ -83,6 +84,7 @@ const Card = (props: any) => {
                                 (types: any, index: number) => {
                                     return (
                                         <div
+                                            className={`type-${index}`}
                                             key={`${
                                                 pokemonInfo[`name`]
                                             }-type-${index}`}
