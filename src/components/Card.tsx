@@ -30,6 +30,8 @@ const Card = (props: any) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    console.log(pokemonInfo);
+
     return (
         <div className="pokemon-card">
             {pokemonInfo.length === 0 ? (
@@ -64,10 +66,7 @@ const Card = (props: any) => {
                     <div className="pokemon-info flex flex-col items-start">
                         <div className="pokemon-name flex self-stretch text-[28px] text-dark-gray">
                             <b>
-                                #
-                                {pokemonInfo[`order`]
-                                    .toString()
-                                    .padStart(3, '0')}{' '}
+                                #{pokemonInfo[`id`].toString().padStart(3, '0')}{' '}
                                 {pokemonInfo[`name`].charAt(0).toUpperCase() +
                                     props.name.slice(1)}
                             </b>
