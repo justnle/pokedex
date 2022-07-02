@@ -6,6 +6,7 @@ import Header from './Header';
 export default function List(props: any) {
     const [pokemonList, setPokemonList] = useState<Array<Object>>([]);
     const [detailState, setDetailState] = useState<Boolean>(false);
+    const [captureState, setCaptureState] = useState<Boolean>(false);
 
     useEffect(() => {
         setPokemonList(props.pokemonList);
@@ -41,7 +42,12 @@ export default function List(props: any) {
                 </div>
                 {detailState ? (
                     <div className="detail-container">
-                        <Detail />
+                        <Detail
+                            onClick={() => {
+                                console.log(`capture me`);
+                                setCaptureState(true);
+                            }}
+                        />
                     </div>
                 ) : null}
             </div>

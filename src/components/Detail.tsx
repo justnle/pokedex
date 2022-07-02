@@ -1,4 +1,4 @@
-export default function Detail() {
+export default function Detail(props: any) {
     const data = {
         name: `bulbasaur`,
         id: 1,
@@ -154,7 +154,10 @@ export default function Detail() {
                 </div>
             </div>
             <div className="capture-container mx-auto flex justify-center align-center bg-white">
-                <div className="capture-button h-[53px] w-[328px] bg-red-500 rounded-[100px] py-3 text-white text-[18px] font-semibold">
+                <div
+                    className="capture-button h-[53px] w-[328px] bg-red-500 rounded-[100px] py-3 text-white text-[18px] font-semibold"
+                    onClick={() => console.log(`capture me!`)}
+                >
                     Capture
                 </div>
             </div>
