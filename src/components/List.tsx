@@ -2,11 +2,16 @@ import { useEffect, useState } from 'react';
 import Card from './Card';
 import Detail from './Detail';
 import Header from './Header';
+import Modal from './Modal';
 
 export default function List(props: any) {
     const [pokemonList, setPokemonList] = useState<Array<Object>>([]);
     const [detailState, setDetailState] = useState<Boolean>(false);
-    const [captureState, setCaptureState] = useState<Boolean>(false);
+    const [showModal, setShowModal] = useState<Boolean>(false);
+
+    const handleOnCapture = () => {
+        setShowModal(false);
+    };
 
     useEffect(() => {
         setPokemonList(props.pokemonList);
@@ -45,11 +50,14 @@ export default function List(props: any) {
                         <Detail
                             onClick={() => {
                                 console.log(`capture me`);
-                                setCaptureState(true);
+                                setShowModal(true);
                             }}
                         />
                     </div>
                 ) : null}
+            </div>
+            <div className="modal-container">
+                {showModal ? <Modal /> : null}
             </div>
         </div>
     );
