@@ -84,8 +84,8 @@ export default function Detail(props: any) {
     };
 
     return (
-        <div className="detail-card h-[818px] w-[360px] shadow-detail-card bg-slate-500 rounded-t-[44px]">
-            <div className="detail-container">
+        <div className="detail-card h-screen w-[360px] shadow-detail-card bg-slate-500 rounded-t-[44px]">
+            <div className="about-stats-container">
                 <div className="picture-container h-[275] w-[360px] py-[48px]">
                     <img
                         src={data.sprites.other.official_artwork.front_default}
@@ -140,10 +140,12 @@ export default function Detail(props: any) {
                                             className="flex justify-start pb-[10px]"
                                             key={index}
                                         >
-                                            {stat.stat.name
-                                                .charAt(0)
-                                                .toUpperCase() +
-                                                stat.stat.name.slice(1)}
+                                            {stat.stat.name === `hp`
+                                                ? stat.stat.name.toUpperCase()
+                                                : stat.stat.name
+                                                      .charAt(0)
+                                                      .toUpperCase() +
+                                                  stat.stat.name.slice(1)}
                                             : {stat.base_stat}
                                         </div>
                                     );
@@ -153,12 +155,12 @@ export default function Detail(props: any) {
                     </div>
                 </div>
             </div>
-            <div className="capture-container mx-auto flex justify-center align-center bg-white">
+            <div className="capture-container px-auto bg-white">
                 <div
-                    className="capture-button h-[53px] w-[328px] bg-red-500 rounded-[100px] py-3 text-white text-[18px] font-semibold"
-                    onClick={() => console.log(`capture me!`)}
+                    className="capture-button h-[53px] w-[328px] bg-red-500 rounded-[100px] mx-auto text-white text-[18px] font-semibold"
+                    onClick={props.onClick}
                 >
-                    Capture
+                    <h2 className="py-3">Capture</h2>
                 </div>
             </div>
         </div>
