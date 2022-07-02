@@ -5,7 +5,7 @@ import Header from './Header';
 
 export default function List(props: any) {
     const [pokemonList, setPokemonList] = useState<Array<Object>>([]);
-    const [detailState, setDetailState] = useState<Object>({});
+    const [detailState, setDetailState] = useState<Boolean>(false);
 
     useEffect(() => {
         setPokemonList(props.pokemonList);
@@ -26,15 +26,21 @@ export default function List(props: any) {
                                         key={`${pokemon[`name`]}-${index}`}
                                         {...pokemon}
                                         useCache={false}
+                                        onClick={() => {
+                                            console.log(detailState);
+                                            setDetailState(true);
+                                        }}
                                     />
                                 );
                             })
                         )}
                     </div>
                 </div>
-                {/* <div className="detail-container">
-                    <Detail />
-                </div> */}
+                {detailState ? (
+                    <div className="detail-container">
+                        <Detail />
+                    </div>
+                ) : null}
             </div>
         </div>
     );
