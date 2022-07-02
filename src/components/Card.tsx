@@ -41,7 +41,7 @@ const Card = (props: any) => {
                     />
                 </div>
             ) : (
-                <div className="rounded-[20px] shadow-lg overflow-hidden">
+                <div className="rounded-2xl shadow-detail-box overflow-hidden">
                     <div
                         className="pokemon-image"
                         style={{
