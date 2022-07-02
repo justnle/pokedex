@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 export default function Detail(props: any) {
     const data = {
         name: `bulbasaur`,
@@ -83,6 +85,8 @@ export default function Detail(props: any) {
         ]
     };
 
+    const [captured, setCaptured] = useState(true);
+
     return (
         <div className="detail-card h-screen w-[360px] shadow-detail-card bg-slate-500 rounded-t-[44px]">
             <div className="about-stats-container">
@@ -156,12 +160,31 @@ export default function Detail(props: any) {
                 </div>
             </div>
             <div className="capture-container px-auto bg-white">
-                <div
-                    className="capture-button h-[53px] w-[328px] bg-red-500 rounded-[100px] mx-auto text-white text-[18px] font-semibold"
-                    onClick={props.onClick}
-                >
-                    <h2 className="py-3">Capture</h2>
-                </div>
+                {captured ? (
+                    <div className="capture-info mx-auto w-[326px] rounded-[16px] shadow-detail-box p-[16px]">
+                        <h2 className="flex justify-start text-[18px]">
+                            <b>Capture Information</b>
+                        </h2>
+                        <div className="about-info text-[15px]">
+                            <div className="flex justify-start py-[10px]">
+                                Nickname: Little Bulba
+                            </div>
+                            <div className="flex justify-start pb-[10px]">
+                                Captured on: Date Captured
+                            </div>
+                            <div className="flex justify-start">
+                                Captured Level: 5
+                            </div>
+                        </div>
+                    </div>
+                ) : (
+                    <div
+                        className="capture-button h-[53px] w-[328px] bg-red-500 rounded-[100px] mx-auto text-white text-[18px] font-semibold"
+                        onClick={props.onClick}
+                    >
+                        <h2 className="py-3">Capture</h2>
+                    </div>
+                )}
             </div>
         </div>
     );
