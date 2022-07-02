@@ -33,7 +33,7 @@ const Card = (props: any) => {
     console.log(pokemonInfo);
 
     return (
-        <div className="pokemon-card">
+        <div className="pokemon-card w-[333px]">
             {pokemonInfo.length === 0 ? (
                 <div>
                     {pokemonInfo[`name`]}{' '}
