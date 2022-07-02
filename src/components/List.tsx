@@ -27,8 +27,11 @@ export default function List(props: any) {
                                         {...pokemon}
                                         useCache={false}
                                         onClick={() => {
-                                            console.log(detailState);
-                                            setDetailState(true);
+                                            console.log(pokemon.name);
+
+                                            detailState
+                                                ? setDetailState(false)
+                                                : setDetailState(true);
                                         }}
                                     />
                                 );

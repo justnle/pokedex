@@ -30,8 +30,6 @@ const Card = (props: any) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log(pokemonInfo);
-
     return (
         <div className="pokemon-card w-[333px]">
             {pokemonInfo.length === 0 ? (
@@ -43,7 +41,10 @@ const Card = (props: any) => {
                     />
                 </div>
             ) : (
-                <div className="rounded-[20px] shadow-lg overflow-hidden">
+                <div
+                    className="rounded-[20px] shadow-lg overflow-hidden"
+                    onClick={props.onClick}
+                >
                     <div
                         className="pokemon-image"
                         style={{
