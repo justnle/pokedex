@@ -3,6 +3,7 @@ import Card from './Card';
 
 export default function List(props: any) {
     const [pokemonList, setPokemonList] = useState<Array<Object>>([]);
+    const [detailState, setDetailState] = useState<Object>({});
 
     useEffect(() => {
         setPokemonList(props.pokemonList);
