@@ -29,7 +29,7 @@ export default function Header() {
             </Link>
             <div className="button-container my-auto h-[72px] w-[420px]">
                 <Link to="/captured">
-                    <div className="captured-button flex flex-row bg-pokemon-red rounded-full">
+                    <div className="captured-button flex flex-row bg-pokemon-red rounded-[100px]">
                         <div className="pokeball">
                             <img
                                 src={pokeball}
