@@ -8,8 +8,8 @@ import './App.css';
 function App() {
     return (
         <Router>
-            <div className="App container mx-auto">
-                <Header />
+            <div className="App container-xl mx-auto px-5">
+                {/* <Header /> */}
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/captured" element={<Captured />} />
