@@ -57,7 +57,7 @@ export default function List(props: any) {
                 ) : null}
             </div>
             {showModal ? (
-                <div className="modal-container absolute w-full h-full">
+                <div className="modal-container absolute w-full h-full bg-black/60">
                     <Modal />
                 </div>
             ) : null}
