@@ -31,14 +31,34 @@ export default function Modal(props: { onClick: () => void }) {
 
         const captureData = {
             name: `bulbasaur`, //pokemon.name
-            nickname: nicknameElement.value,
+            nickname:
+                nicknameElement.value.length > 1
+                    ? nicknameElement.value
+                    : `None`,
             captured_date: toISOStringWithTimezone(new Date()),
             captured_level: Math.floor(Math.random() * 101),
             pokemon_detail: ``
         };
 
-        localStorage.setItem(`test`, JSON.stringify(captureData));
-        console.log(`captured pokemon!`);
+        const storedPokemonData = localStorage.getItem(`capturedPokemon`);
+
+        if (storedPokemonData) {
+            const storedPokemonList = JSON.parse(storedPokemonData);
+
+            storedPokemonList.push(captureData);
+            localStorage.setItem(
+                `capturedPokemon`,
+                JSON.stringify(storedPokemonList)
+            );
+            console.log(`captured pokemon!`);
+        } else {
+            const capturedPokemonList = [captureData];
+            localStorage.setItem(
+                `capturedPokemon`,
+                JSON.stringify(capturedPokemonList)
+            );
+            console.log(`captured pokemon!`);
+        }
         props.onClick();
     };
 
