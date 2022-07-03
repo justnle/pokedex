@@ -86,16 +86,36 @@ export default function Detail(props: any) {
     };
 
     const [captured, setCaptured] = useState(false);
+    const [capturedPokemon, setCapturedPokemon] = useState<Object>({});
 
     useEffect(() => {
         const checkCaptured = () => {
             const capturedPokemon = localStorage.getItem(`test`);
 
-            capturedPokemon ? setCaptured(true) : setCaptured(false);
+            if (capturedPokemon) {
+                setCaptured(true);
+                setCapturedPokemon(JSON.parse(capturedPokemon));
+            } else {
+                setCaptured(false);
+            }
         };
 
         checkCaptured();
-    });
+    }, [captured]);
+
+    const formatDate = (pokemon: Object) => {
+        if (pokemon[`captured_date`]) {
+            const formattedDate = pokemon[`captured_date`],
+                [yyyy, mm, dd] = formattedDate.split(/[/:\-T]/);
+
+            const date = new Date(yyyy, mm - 1, dd);
+            const month = date.toLocaleString('default', { month: 'long' });
+
+            return `${month} ${dd}, ${yyyy}`;
+        }
+    };
+
+    console.log(capturedPokemon);
 
     return (
         <div className="detail-card h-screen w-[360px] shadow-detail-card bg-slate-500 rounded-t-[44px]">
@@ -177,13 +197,14 @@ export default function Detail(props: any) {
                         </h2>
                         <div className="about-info text-[15px]">
                             <div className="flex justify-start py-[10px]">
-                                Nickname: Little Bulba
+                                Nickname: {capturedPokemon[`nickname`]}
                             </div>
                             <div className="flex justify-start pb-[10px]">
-                                Captured on: Date Captured
+                                Captured on: {formatDate(capturedPokemon)}
                             </div>
                             <div className="flex justify-start">
-                                Captured Level: 5
+                                Captured Level:{' '}
+                                {capturedPokemon[`captured_level`]}
                             </div>
                         </div>
                     </div>
