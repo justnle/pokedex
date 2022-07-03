@@ -49,7 +49,6 @@ export default function List(props: any) {
                     <div className="detail-container">
                         <Detail
                             onClick={() => {
-                                console.log(`capture me`);
                                 setShowModal(true);
                             }}
                         />
@@ -58,7 +57,11 @@ export default function List(props: any) {
             </div>
             {showModal ? (
                 <div className="modal-container absolute w-full h-full bg-black/60">
-                    <Modal />
+                    <Modal
+                        onClick={() => {
+                            setShowModal(false);
+                        }}
+                    />
                 </div>
             ) : null}
         </div>
