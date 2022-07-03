@@ -1,7 +1,7 @@
 export default function Modal() {
     return (
-        <div className="modal w-[348px] rounded-[16px] flex flex-col items-center justify-center">
-            <div className="modal-contents px-[24px] py-[32px]">
+        <div className="modal rounded-[16px] flex flex-col items-center justify-center z-10">
+            <div className="modal-contents w-[348px] px-[24px] py-[32px]">
                 <div className="pokemon-name">
                     <h2 className="text-[32px] font-semibold">
                         Capturing Bulbasaur
