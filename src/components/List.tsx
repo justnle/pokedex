@@ -18,8 +18,8 @@ export default function List(props: any) {
     }, [props.pokemonList]);
 
     return (
-        <div className="main-container flex">
-            <div className="list-container flex flex-row absolute">
+        <div className="main-container flex relative">
+            <div className="list-container flex flex-row">
                 <div className="container-lg">
                     <Header />
                     <div className="card-container flex flex-row flex-wrap justify-center gap-6 xl:gap-10">
@@ -56,7 +56,7 @@ export default function List(props: any) {
                     </div>
                 ) : null}
             </div>
-            <div className="modal-container z-10">
+            <div className="modal-container absolute">
                 {showModal ? <Modal /> : null}
             </div>
         </div>
