@@ -90,7 +90,7 @@ export default function Detail(props: any) {
 
     useEffect(() => {
         const checkCaptured = () => {
-            const capturedPokemon = localStorage.getItem(`test`);
+            const capturedPokemon = localStorage.getItem(`capturedPokemon`);
 
             if (capturedPokemon) {
                 setCaptured(true);
@@ -196,7 +196,7 @@ export default function Detail(props: any) {
                         <div className="about-info text-[15px]">
                             <div className="flex justify-start py-[10px]">
                                 Nickname:{' '}
-                                {capturedPokemon[`nickname`].length > 0
+                                {capturedPokemon[`nickname`]
                                     ? capturedPokemon[`nickname`]
                                     : capturedPokemon[`name`]}
                             </div>
