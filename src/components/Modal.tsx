@@ -1,4 +1,4 @@
-export default function Modal() {
+export default function Modal(props: { onClick: () => void }) {
     const toISOStringWithTimezone = (date: Date) => {
         const timeZoneOffset = -date.getTimezoneOffset();
         const diff = timeZoneOffset >= 0 ? `+` : `-`;
@@ -25,9 +25,13 @@ export default function Modal() {
     };
 
     const capturePokemon = () => {
+        const nicknameElement = document.getElementById(
+            `nickname`
+        ) as HTMLInputElement;
+
         const captureData = {
             name: `bulbasaur`, //pokemon.name
-            nickname: `optionalString`,
+            nickname: nicknameElement.value,
             captured_date: toISOStringWithTimezone(new Date()),
             captured_level: Math.floor(Math.random() * 101),
             pokemon_detail: ``
@@ -35,6 +39,7 @@ export default function Modal() {
 
         localStorage.setItem(`test`, JSON.stringify(captureData));
         console.log(`captured pokemon!`);
+        props.onClick();
     };
 
     return (
