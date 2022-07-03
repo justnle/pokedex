@@ -9,10 +9,6 @@ export default function List(props: any) {
     const [detailState, setDetailState] = useState<Boolean>(false);
     const [showModal, setShowModal] = useState<Boolean>(false);
 
-    const handleOnCapture = () => {
-        setShowModal(false);
-    };
-
     useEffect(() => {
         setPokemonList(props.pokemonList);
     }, [props.pokemonList]);
@@ -20,9 +16,9 @@ export default function List(props: any) {
     return (
         <div className="main-container flex relative">
             <div className="list-container flex flex-row">
-                <div className="container-lg">
+                <div className="container-lg px-5">
                     <Header />
-                    <div className="card-container flex flex-row flex-wrap justify-center gap-6 xl:gap-10">
+                    <div className="card-container flex flex-row flex-wrap justify-between gap-6 xl:gap-10">
                         {!pokemonList ? (
                             <div>No Pokemon List to Render</div>
                         ) : (
@@ -33,8 +29,6 @@ export default function List(props: any) {
                                         {...pokemon}
                                         useCache={false}
                                         onClick={() => {
-                                            console.log(pokemon.name);
-
                                             detailState
                                                 ? setDetailState(false)
                                                 : setDetailState(true);
@@ -46,7 +40,7 @@ export default function List(props: any) {
                     </div>
                 </div>
                 {detailState ? (
-                    <div className="detail-container">
+                    <div className="detail-container pr-4">
                         <Detail
                             onClick={() => {
                                 setShowModal(true);
