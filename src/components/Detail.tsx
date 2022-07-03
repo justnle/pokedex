@@ -115,8 +115,6 @@ export default function Detail(props: any) {
         }
     };
 
-    console.log(capturedPokemon);
-
     return (
         <div className="detail-card h-screen w-[360px] shadow-detail-card bg-slate-500 rounded-t-[44px]">
             <div className="about-stats-container">
@@ -197,7 +195,10 @@ export default function Detail(props: any) {
                         </h2>
                         <div className="about-info text-[15px]">
                             <div className="flex justify-start py-[10px]">
-                                Nickname: {capturedPokemon[`nickname`]}
+                                Nickname:{' '}
+                                {capturedPokemon[`nickname`].length > 0
+                                    ? capturedPokemon[`nickname`]
+                                    : capturedPokemon[`name`]}
                             </div>
                             <div className="flex justify-start pb-[10px]">
                                 Captured on: {formatDate(capturedPokemon)}
