@@ -90,7 +90,8 @@ export default function Detail(props: any) {
 
     useEffect(() => {
         const checkCaptured = () => {
-            const capturedPokemon = localStorage.getItem(`capturedPokemon`);
+            const capturedPokemon = localStorage.getItem(``);
+            // const capturedPokemon = localStorage.getItem(`capturedPokemon`);
 
             if (capturedPokemon) {
                 setCaptured(true);
@@ -116,8 +117,8 @@ export default function Detail(props: any) {
     };
 
     return (
-        <div className="detail-card h-screen w-[360px] shadow-detail-card bg-slate-500 rounded-t-[44px]">
-            <div className="about-stats-container">
+        <div className="detail-card flex flex-col justify-end h-screen w-[360px]">
+            <div className="about-stats-container shadow-detail-card bg-slate-500 rounded-t-[44px]">
                 <div className="picture-container h-[275] w-[360px] py-[48px]">
                     <img
                         src={data.sprites.other.official_artwork.front_default}
@@ -186,37 +187,37 @@ export default function Detail(props: any) {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="capture-container px-auto bg-white">
-                {captured ? (
-                    <div className="capture-info mx-auto w-[326px] rounded-[16px] shadow-detail-box p-[16px]">
-                        <h2 className="flex justify-start text-[18px]">
-                            <b>Capture Information</b>
-                        </h2>
-                        <div className="about-info text-[15px]">
-                            <div className="flex justify-start py-[10px]">
-                                Nickname:{' '}
-                                {capturedPokemon[`nickname`]
-                                    ? capturedPokemon[`nickname`]
-                                    : capturedPokemon[`name`]}
-                            </div>
-                            <div className="flex justify-start pb-[10px]">
-                                Captured on: {formatDate(capturedPokemon)}
-                            </div>
-                            <div className="flex justify-start">
-                                Captured Level:{' '}
-                                {capturedPokemon[`captured_level`]}
+                <div className="capture-container px-4 pb-6 bg-white">
+                    {captured ? (
+                        <div className="capture-info mx-auto rounded-[16px] shadow-detail-box p-[16px]">
+                            <h2 className="flex justify-start text-[18px]">
+                                <b>Capture Information</b>
+                            </h2>
+                            <div className="about-info text-[15px]">
+                                <div className="flex justify-start py-[10px]">
+                                    Nickname:{' '}
+                                    {capturedPokemon[`nickname`]
+                                        ? capturedPokemon[`nickname`]
+                                        : capturedPokemon[`name`]}
+                                </div>
+                                <div className="flex justify-start pb-[10px]">
+                                    Captured on: {formatDate(capturedPokemon)}
+                                </div>
+                                <div className="flex justify-start">
+                                    Captured Level:{' '}
+                                    {capturedPokemon[`captured_level`]}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ) : (
-                    <div
-                        className="capture-button h-[53px] w-[328px] bg-red-500 rounded-[100px] mx-auto text-white text-[18px] font-semibold"
-                        onClick={props.onClick}
-                    >
-                        <h2 className="py-3">Capture</h2>
-                    </div>
-                )}
+                    ) : (
+                        <div
+                            className="capture-button h-[53px] bg-pokemon-red rounded-[100px] mx-auto text-white text-[18px] font-semibold ease-out duration-300"
+                            onClick={props.onClick}
+                        >
+                            <h2 className="py-3">Capture</h2>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );
