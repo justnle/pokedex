@@ -85,7 +85,17 @@ export default function Detail(props: any) {
         ]
     };
 
-    const [captured, setCaptured] = useState(true);
+    const [captured, setCaptured] = useState(false);
+
+    useEffect(() => {
+        const checkCaptured = () => {
+            const capturedPokemon = localStorage.getItem(`test`);
+
+            capturedPokemon ? setCaptured(true) : setCaptured(false);
+        };
+
+        checkCaptured();
+    });
 
     return (
         <div className="detail-card h-screen w-[360px] shadow-detail-card bg-slate-500 rounded-t-[44px]">
