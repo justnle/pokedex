@@ -1,6 +1,6 @@
 export default function Modal() {
     return (
-        <div className="modal rounded-[16px] flex flex-col items-center justify-center z-10">
+        <div className="modal rounded-[16px] flex flex-col items-center justify-center h-screen">
             <div className="modal-contents w-[348px] px-[24px] py-[32px]">
                 <div className="pokemon-name">
                     <h2 className="text-[32px] font-semibold">
