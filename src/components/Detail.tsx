@@ -52,7 +52,7 @@ export default function Detail(props: any) {
                         alt={props[`name`]}
                         className="h-[140px] w-[140px] mx-auto"
                     />
-                    <h1>
+                    <h1 className="text-center">
                         <b className="text-white text-[26px]">
                             #{props[`id`].toString().padStart(3, '0')}{' '}
                             {props[`name`].charAt(0).toUpperCase() +
@@ -62,11 +62,11 @@ export default function Detail(props: any) {
                 </div>
                 <div className="info-container bg-white py-[32px]">
                     <div className="about-container mx-auto w-[326px] rounded-[16px] shadow-detail-box p-[16px]">
-                        <h2 className="flex justify-start text-[18px]">
+                        <h2 className="text-[18px]">
                             <b>About</b>
                         </h2>
                         <div className="about-info text-[15px]">
-                            <div className="flex justify-start py-[10px]">
+                            <div className="pokemon-types py-[10px]">
                                 Type(s):{' '}
                                 {props[`types`]
                                     .map(
@@ -76,13 +76,13 @@ export default function Detail(props: any) {
                                                 .toUpperCase() +
                                             type[`type`][`name`].slice(1)
                                     )
-                                    .join(', ')}
+                                    .join(' \u00B7 ')}
                             </div>
-                            <div className="flex justify-start pb-[10px]">
+                            <div className="pokemon-weight pb-[10px]">
                                 Weight: {Math.round(props[`weight`] / 10)}
                                 {` `}kg
                             </div>
-                            <div className="flex justify-start">
+                            <div className="pokemon-height">
                                 Height: {props[`height`] / 10}
                                 {` `}m
                             </div>
@@ -90,7 +90,7 @@ export default function Detail(props: any) {
                     </div>
                     <div className="pt-[24px]">
                         <div className="stats-container mx-auto w-[326px] rounded-[16px] shadow-detail-box p-[16px]">
-                            <h2 className="flex justify-start text-[18px]">
+                            <h2 className="text-[18px]">
                                 <b>Base Stats</b>
                             </h2>
                             <div className="stats-info text-[15px]">
@@ -98,7 +98,7 @@ export default function Detail(props: any) {
                                     (stat: Object, index: number) => {
                                         return (
                                             <div
-                                                className="flex justify-start pb-[10px]"
+                                                className="pb-[10px]"
                                                 key={index}
                                             >
                                                 {stat[`stat`][`name`] === `hp`
@@ -147,7 +147,7 @@ export default function Detail(props: any) {
                             className="capture-button h-[53px] bg-pokemon-red rounded-[100px] mx-auto text-white text-[18px] font-semibold ease-out duration-300"
                             onClick={props.onClick}
                         >
-                            <h2 className="py-3">Capture</h2>
+                            <h2 className="text-center py-3">Capture</h2>
                         </div>
                     )}
                 </div>
