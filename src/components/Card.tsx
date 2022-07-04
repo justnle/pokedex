@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getCachedPokemonData, getPokemonData } from '../utils/request';
 import { typeColor } from '../utils/backgrounds';
-import './Card.css';
 
 const Card = (props: any) => {
     const [pokemonInfo, setPokemonInfo] = useState<Array<Object>>(
@@ -41,7 +40,7 @@ const Card = (props: any) => {
             }}
         >
             {pokemonInfo.length === 0 ? (
-                <div>
+                <div className="placeholder-container">
                     {pokemonInfo[`name`]}{' '}
                     <img
                         src={`https://via.placeholder.com/150`}
@@ -69,7 +68,7 @@ const Card = (props: any) => {
                             className="h-40 w-40 mx-auto"
                         />
                     </div>
-                    <div className="pokemon-info flex flex-col items-start">
+                    <div className="pokemon-info flex flex-col items-start pt-[8px] pr-[8px] pb-[16px] pl-[16px]">
                         <div className="pokemon-name flex self-stretch text-[28px] text-dark-gray">
                             <b>
                                 #{pokemonInfo[`id`].toString().padStart(3, '0')}{' '}
