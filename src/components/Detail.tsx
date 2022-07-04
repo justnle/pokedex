@@ -1,90 +1,6 @@
 import { useEffect, useState } from 'react';
 
 export default function Detail(props: any) {
-    const data = {
-        name: `bulbasaur`,
-        id: 1,
-        types: [
-            {
-                slot: 1,
-                type: {
-                    name: `grass`,
-                    url: `https://pokeapi.co/api/v2/type/12/`
-                }
-            },
-            {
-                slot: 2,
-                type: {
-                    name: `poison`,
-                    url: `https://pokeapi.co/api/v2/type/4/`
-                }
-            }
-        ],
-        weight: 69,
-        height: 7,
-        species: {
-            name: `bulbasaur`,
-            url: `https://pokeapi.co/api/v2/pokemon-species/1/`
-        },
-        sprites: {
-            other: {
-                official_artwork: {
-                    front_default: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png`
-                }
-            }
-        },
-        stats: [
-            {
-                base_stat: 45,
-                effort: 0,
-                stat: {
-                    name: `hp`,
-                    url: `https://pokeapi.co/api/v2/stat/1/`
-                }
-            },
-            {
-                base_stat: 49,
-                effort: 0,
-                stat: {
-                    name: `attack`,
-                    url: `https://pokeapi.co/api/v2/stat/2/`
-                }
-            },
-            {
-                base_stat: 49,
-                effort: 0,
-                stat: {
-                    name: `defense`,
-                    url: `https://pokeapi.co/api/v2/stat/3/`
-                }
-            },
-            {
-                base_stat: 65,
-                effort: 1,
-                stat: {
-                    name: `special-attack`,
-                    url: `https://pokeapi.co/api/v2/stat/4/`
-                }
-            },
-            {
-                base_stat: 65,
-                effort: 0,
-                stat: {
-                    name: `special-defense`,
-                    url: `https://pokeapi.co/api/v2/stat/5/`
-                }
-            },
-            {
-                base_stat: 45,
-                effort: 0,
-                stat: {
-                    name: `speed`,
-                    url: `https://pokeapi.co/api/v2/stat/6/`
-                }
-            }
-        ]
-    };
-
     const [captured, setCaptured] = useState(false);
     const [capturedPokemon, setCapturedPokemon] = useState<Object>({});
 
@@ -117,19 +33,23 @@ export default function Detail(props: any) {
     };
 
     return (
-        <div className="detail-card flex flex-col justify-end h-screen w-[360px]">
+        <div className="detail-card flex flex-col justify-end h-screen sticky right-0">
             <div className="about-stats-container shadow-detail-card bg-slate-500 rounded-t-[44px]">
                 <div className="picture-container h-[275] w-[360px] py-[48px]">
                     <img
-                        src={data.sprites.other.official_artwork.front_default}
-                        alt={data.name}
+                        src={
+                            props[`sprites`][`other`][`official-artwork`][
+                                `front_default`
+                            ]
+                        }
+                        alt={props[`name`]}
                         className="h-[140px] w-[140px] mx-auto"
                     />
                     <h1>
                         <b className="text-white text-[26px]">
-                            #{data.id.toString().padStart(3, '0')}{' '}
-                            {data.name.charAt(0).toUpperCase() +
-                                data.name.slice(1)}
+                            #{props[`id`].toString().padStart(3, '0')}{' '}
+                            {props[`name`].charAt(0).toUpperCase() +
+                                props[`name`].slice(1)}
                         </b>
                     </h1>
                 </div>
@@ -141,22 +61,22 @@ export default function Detail(props: any) {
                         <div className="about-info text-[15px]">
                             <div className="flex justify-start py-[10px]">
                                 Type(s):{' '}
-                                {data.types
+                                {props[`types`]
                                     .map(
-                                        (type) =>
-                                            type.type.name
+                                        (type: Object) =>
+                                            type[`type`][`name`]
                                                 .charAt(0)
                                                 .toUpperCase() +
-                                            type.type.name.slice(1)
+                                            type[`type`][`name`].slice(1)
                                     )
                                     .join(', ')}
                             </div>
                             <div className="flex justify-start pb-[10px]">
-                                Weight: {Math.round(data.weight / 10)}
+                                Weight: {Math.round(props[`weight`] / 10)}
                                 {` `}kg
                             </div>
                             <div className="flex justify-start">
-                                Height: {data.height / 10}
+                                Height: {props[`height`] / 10}
                                 {` `}m
                             </div>
                         </div>
@@ -167,22 +87,28 @@ export default function Detail(props: any) {
                                 <b>Base Stats</b>
                             </h2>
                             <div className="stats-info text-[15px]">
-                                {data.stats.map((stat: any, index: number) => {
-                                    return (
-                                        <div
-                                            className="flex justify-start pb-[10px]"
-                                            key={index}
-                                        >
-                                            {stat.stat.name === `hp`
-                                                ? stat.stat.name.toUpperCase()
-                                                : stat.stat.name
-                                                      .charAt(0)
-                                                      .toUpperCase() +
-                                                  stat.stat.name.slice(1)}
-                                            : {stat.base_stat}
-                                        </div>
-                                    );
-                                })}
+                                {props[`stats`].map(
+                                    (stat: Object, index: number) => {
+                                        return (
+                                            <div
+                                                className="flex justify-start pb-[10px]"
+                                                key={index}
+                                            >
+                                                {stat[`stat`][`name`] === `hp`
+                                                    ? stat[`stat`][
+                                                          `name`
+                                                      ].toUpperCase()
+                                                    : stat[`stat`][`name`]
+                                                          .charAt(0)
+                                                          .toUpperCase() +
+                                                      stat[`stat`][
+                                                          `name`
+                                                      ].slice(1)}
+                                                : {stat[`base_stat`]}
+                                            </div>
+                                        );
+                                    }
+                                )}
                             </div>
                         </div>
                     </div>

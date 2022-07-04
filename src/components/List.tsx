@@ -6,12 +6,17 @@ import Modal from './Modal';
 
 export default function List(props: any) {
     const [pokemonList, setPokemonList] = useState<Array<Object>>([]);
-    const [detailState, setDetailState] = useState<Boolean>(false);
+    const [showDetail, setShowDetailState] = useState<Boolean>(false);
+    const [detailInfo, setDetailInfo] = useState<Object>({});
     const [showModal, setShowModal] = useState<Boolean>(false);
 
     useEffect(() => {
         setPokemonList(props.pokemonList);
     }, [props.pokemonList]);
+
+    const getDetailInfo = (pokemonInfo: Object) => {
+        setDetailInfo(pokemonInfo);
+    };
 
     return (
         <div className="main-container flex relative">
@@ -28,10 +33,11 @@ export default function List(props: any) {
                                         key={`${pokemon[`name`]}-${index}`}
                                         {...pokemon}
                                         useCache={false}
+                                        pokemonInfo={getDetailInfo}
                                         onClick={() => {
-                                            detailState
-                                                ? setDetailState(false)
-                                                : setDetailState(true);
+                                            showDetail
+                                                ? setShowDetailState(false)
+                                                : setShowDetailState(true);
                                         }}
                                     />
                                 );
@@ -39,12 +45,13 @@ export default function List(props: any) {
                         )}
                     </div>
                 </div>
-                {detailState ? (
+                {showDetail ? (
                     <div className="detail-container pr-8">
                         <Detail
                             onClick={() => {
                                 setShowModal(true);
                             }}
+                            {...detailInfo}
                         />
                     </div>
                 ) : null}

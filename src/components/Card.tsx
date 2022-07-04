@@ -31,7 +31,13 @@ const Card = (props: any) => {
     }, []);
 
     return (
-        <div className="pokemon-card w-[333px]" onClick={props.onClick}>
+        <div
+            className="pokemon-card w-[333px]"
+            onClick={() => {
+                props.pokemonInfo(pokemonInfo);
+                props.onClick();
+            }}
+        >
             {pokemonInfo.length === 0 ? (
                 <div>
                     {pokemonInfo[`name`]}{' '}
