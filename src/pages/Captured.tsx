@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Header from '../components/Header';
+import { typeColor } from '../utils/backgrounds';
 
 export default function Captured() {
     const [capturedPokemon, setCapturedPokemon] = useState([]);
@@ -38,7 +39,19 @@ export default function Captured() {
                                         className="text-[28px]"
                                     >
                                         <td className="flex">
-                                            <div className="pokemon-picture w-[100px] h-[100px]">
+                                            <div
+                                                className="pokemon-picture w-[116px] h-[116px] rounded-[16px]"
+                                                style={{
+                                                    backgroundColor:
+                                                        typeColor[
+                                                            pokemon[
+                                                                `pokemon_detail`
+                                                            ][`types`][0][
+                                                                `type`
+                                                            ][`name`]
+                                                        ]
+                                                }}
+                                            >
                                                 <img
                                                     src={
                                                         pokemon[
@@ -47,6 +60,8 @@ export default function Captured() {
                                                             `official-artwork`
                                                         ][`front_default`]
                                                     }
+                                                    alt={pokemon[`name`]}
+                                                    className="p-[16px]"
                                                 />
                                             </div>
                                             <div className="pokemon-info">
