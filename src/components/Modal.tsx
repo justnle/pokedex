@@ -1,43 +1,21 @@
+import { toISOStringWithTimezone } from '../utils/date';
+
 export default function Modal(props: { onClick: () => void }) {
-    const toISOStringWithTimezone = (date: Date) => {
-        const timeZoneOffset = -date.getTimezoneOffset();
-        const diff = timeZoneOffset >= 0 ? `+` : `-`;
-        const pad = (num: number) =>
-            `${Math.floor(Math.abs(num))}`.padStart(2, `0`);
-
-        return (
-            date.getFullYear() +
-            `-` +
-            pad(date.getMonth() + 1) +
-            `-` +
-            pad(date.getDate()) +
-            `T` +
-            pad(date.getHours()) +
-            `:` +
-            pad(date.getMinutes()) +
-            `:` +
-            pad(date.getSeconds()) +
-            diff +
-            pad(timeZoneOffset / 60) +
-            `:` +
-            pad(timeZoneOffset % 60)
-        );
-    };
-
     const capturePokemon = () => {
         const nicknameElement = document.getElementById(
             `nickname`
         ) as HTMLInputElement;
 
         const captureData = {
-            name: `bulbasaur`, //pokemon.name
+            name:
+                props[`name`].charAt(0).toUpperCase() + props[`name`].slice(1),
             nickname:
                 nicknameElement.value.length > 1
                     ? nicknameElement.value
                     : `None`,
             captured_date: toISOStringWithTimezone(new Date()),
             captured_level: Math.floor(Math.random() * 101),
-            pokemon_detail: ``
+            pokemon_detail: props
         };
 
         const storedPokemonData = localStorage.getItem(`capturedPokemon`);
@@ -67,7 +45,11 @@ export default function Modal(props: { onClick: () => void }) {
             <div className="modal-contents w-[348px] px-[24px] py-[32px] bg-white rounded-[16px]">
                 <div className="pokemon-name">
                     <h2 className="text-[32px]">
-                        <b className="font-semibold">Capturing Bulbasaur</b>
+                        <b className="font-semibold">
+                            Capturing{' '}
+                            {props[`name`].charAt(0).toUpperCase() +
+                                props[`name`].slice(1)}
+                        </b>
                     </h2>
                 </div>
                 <div className="capture-details py-5">
@@ -98,10 +80,10 @@ export default function Modal(props: { onClick: () => void }) {
                     ></input>
                 </div>
                 <div
-                    className="capture-button bg-red-500 rounded-[100px] mx-auto text-white text-[18px] font-semibold"
+                    className="capture-button bg-red-500 rounded-[100px] text-white text-[18px] font-semibold"
                     onClick={() => capturePokemon()}
                 >
-                    <h2 className="py-3">Capture</h2>
+                    <h2 className="text-center py-3">Capture</h2>
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { typeColor } from '../utils/backgrounds';
+import { formatDate } from '../utils/date';
 
 export default function Detail(props: any) {
     const [captured, setCaptured] = useState(false);
@@ -20,18 +21,6 @@ export default function Detail(props: any) {
 
         checkCaptured();
     }, [captured]);
-
-    const formatDate = (pokemon: Object) => {
-        if (pokemon[`captured_date`]) {
-            const formattedDate = pokemon[`captured_date`],
-                [yyyy, mm, dd] = formattedDate.split(/[/:\-T]/);
-
-            const date = new Date(yyyy, mm - 1, dd);
-            const month = date.toLocaleString('default', { month: 'long' });
-
-            return `${month} ${dd}, ${yyyy}`;
-        }
-    };
 
     return (
         <div className="detail-card flex flex-col justify-end h-screen sticky right-0">
