@@ -12,6 +12,8 @@ export default function Captured() {
         }
     }, []);
 
+    console.log(capturedPokemon);
+
     return (
         <div className="captured px-10">
             <Header />
@@ -35,7 +37,50 @@ export default function Captured() {
                                         }-table-row-${index}`}
                                         className="text-[28px]"
                                     >
-                                        <td>{pokemon[`name`]}</td>
+                                        <td className="flex">
+                                            <div className="pokemon-picture w-[100px] h-[100px]">
+                                                <img
+                                                    src={
+                                                        pokemon[
+                                                            `pokemon_detail`
+                                                        ][`sprites`][`other`][
+                                                            `official-artwork`
+                                                        ][`front_default`]
+                                                    }
+                                                />
+                                            </div>
+                                            <div className="pokemon-info">
+                                                <div className="pokemon-name">
+                                                    <b>
+                                                        #
+                                                        {pokemon[
+                                                            `pokemon_detail`
+                                                        ][`id`]
+                                                            .toString()
+                                                            .padStart(3, `0`)}
+                                                        {` `}
+                                                        {pokemon[`name`]}
+                                                    </b>
+                                                </div>
+                                                <div className="pokemon-type-info">
+                                                    {pokemon[`pokemon_detail`][
+                                                        `types`
+                                                    ]
+                                                        .map(
+                                                            (type: Object) =>
+                                                                type[`type`][
+                                                                    `name`
+                                                                ]
+                                                                    .charAt(0)
+                                                                    .toUpperCase() +
+                                                                type[`type`][
+                                                                    `name`
+                                                                ].slice(1)
+                                                        )
+                                                        .join(' \u00B7 ')}
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td>{pokemon[`nickname`]}</td>
                                         <td>{pokemon[`captured_date`]}</td>
                                         <td>{pokemon[`captured_level`]}</td>
