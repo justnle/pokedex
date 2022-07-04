@@ -111,9 +111,9 @@ export default function Detail(props: any) {
                     </div>
                 </div>
                 <div className="capture-container px-4 pb-6 bg-white">
-                    {capturedPokemon.filter(
+                    {capturedPokemon.some(
                         (pokemon: Object) => pokemon[`name`] === props[`name`]
-                    ).length > 0 ? (
+                    ) ? (
                         <div className="capture-info mx-auto rounded-[16px] shadow-detail-box p-[16px]">
                             <h2 className="flex justify-start text-[18px]">
                                 <b>Capture Information</b>
