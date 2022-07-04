@@ -29,8 +29,6 @@ const Card = (props: any) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log(pokemonInfo[`types`]);
-
     return (
         <div
             className="pokemon-card w-[333px]"
