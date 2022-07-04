@@ -4,12 +4,11 @@ import { formatDate } from '../utils/date';
 
 export default function Detail(props: any) {
     const [captured, setCaptured] = useState(false);
-    const [capturedPokemon, setCapturedPokemon] = useState<Object>({});
+    const [capturedPokemon, setCapturedPokemon] = useState([]);
 
     useEffect(() => {
         const checkCaptured = () => {
-            const capturedPokemon = localStorage.getItem(``);
-            // const capturedPokemon = localStorage.getItem(`capturedPokemon`);
+            const capturedPokemon = localStorage.getItem(`capturedPokemon`);
 
             if (capturedPokemon) {
                 setCaptured(true);
@@ -21,6 +20,8 @@ export default function Detail(props: any) {
 
         checkCaptured();
     }, [captured]);
+
+    console.log(capturedPokemon);
 
     return (
         <div className="detail-card flex flex-col justify-end h-screen sticky right-0">
@@ -110,7 +111,9 @@ export default function Detail(props: any) {
                     </div>
                 </div>
                 <div className="capture-container px-4 pb-6 bg-white">
-                    {captured ? (
+                    {capturedPokemon.filter(
+                        (pokemon: Object) => pokemon[`name`] === props[`name`]
+                    ).length > 0 ? (
                         <div className="capture-info mx-auto rounded-[16px] shadow-detail-box p-[16px]">
                             <h2 className="flex justify-start text-[18px]">
                                 <b>Capture Information</b>
@@ -118,7 +121,7 @@ export default function Detail(props: any) {
                             <div className="about-info text-[15px]">
                                 <div className="flex justify-start py-[10px]">
                                     Nickname:{' '}
-                                    {capturedPokemon[`nickname`]
+                                    {capturedPokemon[`nickname`] !== `None`
                                         ? capturedPokemon[`nickname`]
                                         : capturedPokemon[`name`]}
                                 </div>
