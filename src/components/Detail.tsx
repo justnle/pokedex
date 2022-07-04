@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { typeColor } from '../utils/backgrounds';
 
 export default function Detail(props: any) {
     const [captured, setCaptured] = useState(false);
@@ -34,7 +35,13 @@ export default function Detail(props: any) {
 
     return (
         <div className="detail-card flex flex-col justify-end h-screen sticky right-0">
-            <div className="about-stats-container shadow-detail-card bg-slate-500 rounded-t-[44px]">
+            <div
+                className="about-stats-container shadow-detail-card rounded-t-[44px]"
+                style={{
+                    backgroundColor:
+                        typeColor[props[`types`][0][`type`][`name`]]
+                }}
+            >
                 <div className="picture-container h-[275] w-[360px] py-[48px]">
                     <img
                         src={
