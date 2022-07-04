@@ -30,6 +30,8 @@ const Card = (props: any) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    console.log(pokemonInfo[`types`]);
+
     return (
         <div
             className="pokemon-card w-[333px]"
@@ -76,23 +78,15 @@ const Card = (props: any) => {
                             </b>
                         </div>
                         <div className="pokemon-type flex flex-row self-stretch text-[24px] text-medium-gray">
-                            {pokemonInfo[`types`].map(
-                                (types: any, index: number) => {
-                                    return (
-                                        <div
-                                            className={`type-${index}`}
-                                            key={`${
-                                                pokemonInfo[`name`]
-                                            }-type-${index}`}
-                                        >
-                                            {types.type.name
-                                                .charAt(0)
-                                                .toUpperCase() +
-                                                types.type.name.slice(1)}
-                                        </div>
-                                    );
-                                }
-                            )}
+                            {pokemonInfo[`types`]
+                                .map(
+                                    (type: Object) =>
+                                        type[`type`][`name`]
+                                            .charAt(0)
+                                            .toUpperCase() +
+                                        type[`type`][`name`].slice(1)
+                                )
+                                .join(' \u00B7 ')}
                         </div>
                     </div>
                 </div>
