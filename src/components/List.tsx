@@ -6,7 +6,7 @@ import Modal from './Modal';
 
 export default function List(props: any) {
     const [pokemonList, setPokemonList] = useState<Array<Object>>([]);
-    const [showDetail, setShowDetailState] = useState<Boolean>(false);
+    const [showDetail, setShowDetail] = useState<Boolean>(false);
     const [detailInfo, setDetailInfo] = useState<Object>({});
     const [showModal, setShowModal] = useState<Boolean>(false);
 
@@ -35,9 +35,7 @@ export default function List(props: any) {
                                         useCache={false}
                                         pokemonInfo={getDetailInfo}
                                         onClick={() => {
-                                            showDetail
-                                                ? setShowDetailState(false)
-                                                : setShowDetailState(true);
+                                            setShowDetail(true);
                                         }}
                                     />
                                 );
@@ -46,11 +44,12 @@ export default function List(props: any) {
                     </div>
                 </div>
                 {showDetail ? (
-                    <div className="detail-container pr-8">
+                    <div
+                        className="detail-container pr-8"
+                        onClick={() => setShowDetail(false)}
+                    >
                         <Detail
-                            onClick={() => {
-                                setShowModal(true);
-                            }}
+                            onClick={() => setShowModal(true)}
                             {...detailInfo}
                         />
                     </div>
@@ -62,6 +61,7 @@ export default function List(props: any) {
                         onClick={() => {
                             setShowModal(false);
                         }}
+                        {...detailInfo}
                     />
                 </div>
             ) : null}
