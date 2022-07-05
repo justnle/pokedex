@@ -7,8 +7,7 @@ export default function Modal(props: { onClick: () => void }) {
         ) as HTMLInputElement;
 
         const captureData = {
-            name:
-                props[`name`].charAt(0).toUpperCase() + props[`name`].slice(1),
+            name: props[`name`],
             nickname:
                 nicknameElement.value.length > 1
                     ? nicknameElement.value
@@ -28,15 +27,14 @@ export default function Modal(props: { onClick: () => void }) {
                 `capturedPokemon`,
                 JSON.stringify(storedPokemonList)
             );
-            console.log(`captured pokemon!`);
         } else {
             const capturedPokemonList = [captureData];
             localStorage.setItem(
                 `capturedPokemon`,
                 JSON.stringify(capturedPokemonList)
             );
-            console.log(`captured pokemon!`);
         }
+        localStorage.setItem(props[`name`], JSON.stringify(captureData));
         props.onClick();
     };
 
