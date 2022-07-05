@@ -8,7 +8,7 @@ export default function Detail(props: any) {
 
     useEffect(() => {
         const checkCaptured = () => {
-            const capturedPokemon = localStorage.getItem(`capturedPokemon`);
+            const capturedPokemon = localStorage.getItem(props[`name`]);
 
             if (capturedPokemon) {
                 setCaptured(true);
@@ -16,12 +16,11 @@ export default function Detail(props: any) {
             } else {
                 setCaptured(false);
             }
+            console.log();
         };
 
         checkCaptured();
-    }, [captured]);
-
-    console.log(capturedPokemon);
+    }, [props[`name`]]);
 
     return (
         <div className="detail-card flex flex-col justify-end h-screen sticky right-0">
@@ -111,21 +110,22 @@ export default function Detail(props: any) {
                     </div>
                 </div>
                 <div className="capture-container px-4 pb-6 bg-white">
-                    {capturedPokemon.some(
-                        (pokemon: Object) => pokemon[`name`] === props[`name`]
-                    ) ? (
+                    {captured ? (
                         <div className="capture-info mx-auto rounded-[16px] shadow-detail-box p-[16px]">
-                            <h2 className="flex justify-start text-[18px]">
+                            <h2 className="text-[18px]">
                                 <b>Capture Information</b>
                             </h2>
                             <div className="about-info text-[15px]">
-                                <div className="flex justify-start py-[10px]">
+                                <div className="py-[10px]">
                                     Nickname:{' '}
                                     {capturedPokemon[`nickname`] !== `None`
                                         ? capturedPokemon[`nickname`]
-                                        : capturedPokemon[`name`]}
+                                        : capturedPokemon[`name`]
+                                              .charAt(0)
+                                              .toUpperCase() +
+                                          capturedPokemon[`name`].slice(1)}
                                 </div>
-                                <div className="flex justify-start pb-[10px]">
+                                <div className="pb-[10px]">
                                     Captured on: {formatDate(capturedPokemon)}
                                 </div>
                                 <div className="flex justify-start">
