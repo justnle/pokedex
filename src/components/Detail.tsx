@@ -79,7 +79,7 @@ export default function Detail(props: any) {
                     </div>
                     <div className="pt-[24px]">
                         <div className="stats-container mx-auto w-[326px] rounded-[16px] shadow-detail-box p-[16px]">
-                            <h2 className="text-[18px]">
+                            <h2 className="text-[18px] pb-[10px]">
                                 <b>Base Stats</b>
                             </h2>
                             <div className="stats-info text-[15px]">
@@ -112,19 +112,17 @@ export default function Detail(props: any) {
                 <div className="capture-container px-4 pb-6 bg-white">
                     {captured ? (
                         <div className="capture-info mx-auto rounded-[16px] shadow-detail-box p-[16px]">
-                            <h2 className="text-[18px]">
+                            <h2 className="text-[18px] pb-[10px]">
                                 <b>Capture Information</b>
                             </h2>
                             <div className="about-info text-[15px]">
-                                <div className="py-[10px]">
-                                    Nickname:{' '}
-                                    {capturedPokemon[`nickname`] !== `None`
-                                        ? capturedPokemon[`nickname`]
-                                        : capturedPokemon[`name`]
-                                              .charAt(0)
-                                              .toUpperCase() +
-                                          capturedPokemon[`name`].slice(1)}
-                                </div>
+                                {capturedPokemon[`nickname`] === `None` ? (
+                                    <div className=""></div>
+                                ) : (
+                                    <div className="pb-[10px]">
+                                        Nickname: {capturedPokemon[`nickname`]}
+                                    </div>
+                                )}
                                 <div className="pb-[10px]">
                                     Captured on: {formatDate(capturedPokemon)}
                                 </div>
