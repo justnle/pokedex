@@ -2,7 +2,7 @@ import pokedexLogo from '../assets/pokedex_logo.png';
 import pokeball from '../assets/pokeball.png';
 import { Link } from 'react-router-dom';
 
-export default function Header(props: { catchButton: boolean }) {
+export default function Header(props: { catchButton: boolean }): JSX.Element {
     return (
         <div className="header flex flex-row justify-between mt-[48px] mb-[36px]">
             <Link to="/">
