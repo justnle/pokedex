@@ -2,26 +2,9 @@ import pokedexLogo from '../assets/pokedex_logo.png';
 import pokeball from '../assets/pokeball.png';
 import { Link } from 'react-router-dom';
 
-interface Style {
-    [key: string]: string;
-}
-
-const headerStyle: Style = {
-    // position: 'absolute',
-    // width: '331.71px',
-    // height: '120px',
-    // left: '36px',
-    // top: '48px',
-    marginTop: '48px',
-    marginBottom: '36px'
-};
-
 export default function Header() {
     return (
-        <div
-            className="header flex flex-row justify-between"
-            style={headerStyle}
-        >
+        <div className="header flex flex-row justify-between mt-[48px] mb-[36px]">
             <Link to="/">
                 <div className="logo">
                     <img src={pokedexLogo} alt="pokemon-logo" />
