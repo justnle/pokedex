@@ -16,7 +16,7 @@ export default function Captured() {
 
     return (
         <div className="captured-container px-10">
-            <Header />
+            <Header catchButton={false} />
             <div className="captured-list-container">
                 <div className="table-header grid grid-cols-4 bg-light-gray/30 rounded-[16px] text-[24px] font-[590] px-6 py-4">
                     <div>POKEMON</div>

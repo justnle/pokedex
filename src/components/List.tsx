@@ -22,7 +22,7 @@ export default function List(props: any) {
         <div className="page-container flex relative">
             <div className="detail-list-container flex flex-row">
                 <div className="header-list-container-lg px-10">
-                    <Header />
+                    <Header catchButton={true} />
                     <div className="card-container flex flex-row flex-wrap justify-between gap-6 xl:gap-10">
                         {!pokemonList ? (
                             <div>No Pokemon List to Render</div>
