@@ -1,6 +1,6 @@
 import { toISOStringWithTimezone } from '../utils/date';
 
-export default function Modal(props: { onClick: () => void }) {
+export default function Modal(props: { onClick: () => void }): JSX.Element {
     const capturePokemon = () => {
         const nicknameElement = document.getElementById(
             `nickname`

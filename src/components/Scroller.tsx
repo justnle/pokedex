@@ -5,7 +5,11 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 const API_URL_FIRST_20 = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=0`;
 
-export default function Scroll({ useCache }: { useCache: boolean }) {
+export default function Scroll({
+    useCache
+}: {
+    useCache: boolean;
+}): JSX.Element {
     const [pokemonList, setPokemonList] = useState<Array<Object>>([]);
     const [nextPokemonList, setNextPokemonList] = useState<Array<Object>>([]);
 
