@@ -10,20 +10,11 @@ const getPokemonData = async (url: string, cacheResponse = false) => {
         }
     } else {
         return await axios.get(url).then((res) => {
-            // console.log(`making api call`);
-
             cacheResponse && writeToCache(url, res.data);
 
             return res.data;
         });
     }
-    // return await axios.get(url).then((res) => {
-    //     console.log(`making api call`);
-
-    //     cacheResponse && writeToCache(url, res.data);
-
-    //     return res.data;
-    // });
 };
 
 const getCachedPokemonData = (url: string) => readFromCache(url);
