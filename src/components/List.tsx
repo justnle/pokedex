@@ -4,7 +4,12 @@ import Detail from './Detail';
 import Header from './Header';
 import Modal from './Modal';
 
-export default function List(props: any) {
+type Props = {
+    useCache: boolean;
+    pokemonList: Array<Object>;
+};
+
+export default function List(props: Props): JSX.Element {
     const [pokemonList, setPokemonList] = useState<Array<Object>>([]);
     const [showDetail, setShowDetail] = useState<Boolean>(false);
     const [detailInfo, setDetailInfo] = useState<Object>({});
