@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import { typeColor } from '../utils/backgrounds';
 import { formatDate } from '../utils/date';
 
-export default function Captured() {
+export default function Captured(): JSX.Element {
     const [capturedPokemon, setCapturedPokemon] = useState([]);
 
     useEffect(() => {
