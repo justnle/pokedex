@@ -20,6 +20,7 @@ export default function Detail(props: any) {
         };
 
         checkCaptured();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props[`name`]]);
 
     return (
