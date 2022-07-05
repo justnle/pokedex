@@ -62,7 +62,10 @@ export default function Captured() {
                                                 .toString()
                                                 .padStart(3, `0`)}
                                             {` `}
-                                            {pokemon[`name`]}
+                                            {pokemon[`name`]
+                                                .charAt(0)
+                                                .toUpperCase() +
+                                                pokemon[`name`].slice(1)}
                                         </b>
                                     </div>
                                     <div className="pokemon-type-info text-medium-gray text-[24px]">
@@ -80,13 +83,19 @@ export default function Captured() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="pokemon-nickname my-auto">
-                                {pokemon[`nickname`]}
-                            </div>
-                            <div className="pokemon-caputured-date my-auto">
+                            {pokemon[`nickname`] === `None` ? (
+                                <div className="pokemon-no-nickname my-auto text-dark-gray/20 font-[510]">
+                                    None
+                                </div>
+                            ) : (
+                                <div className="pokemon-nickname my-auto font-[510]">
+                                    {pokemon[`nickname`]}
+                                </div>
+                            )}
+                            <div className="pokemon-caputured-date my-auto font-[510]">
                                 {formatDate(pokemon)}
                             </div>
-                            <div className="pokemon-captured-level my-auto">
+                            <div className="pokemon-captured-level my-auto font-[510]">
                                 {pokemon[`captured_level`]}
                             </div>
                         </div>
