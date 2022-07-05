@@ -1,55 +1,70 @@
-import { useState, useEffect } from 'react';
-import { getCachedPokemonData, getPokemonData } from '../utils/request';
+import { useEffect, useState } from 'react';
 import Card from './Card';
+import Detail from './Detail';
+import Header from './Header';
+import Modal from './Modal';
 
-interface Pokemon {
-    name: string;
-    url: string;
-}
-
-const LIST_URL = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=0`;
-
-export default function List({ useCache }: { useCache?: boolean }) {
+export default function List(props: any) {
     const [pokemonList, setPokemonList] = useState<Array<Object>>([]);
+    const [showDetail, setShowDetail] = useState<Boolean>(false);
+    const [detailInfo, setDetailInfo] = useState<Object>({});
+    const [showModal, setShowModal] = useState<Boolean>(false);
 
     useEffect(() => {
-        const callApi = async () => {
-            setPokemonList([]);
+        setPokemonList(props.pokemonList);
+    }, [props.pokemonList]);
 
-            if (useCache) {
-                const cachedPokemonList = getCachedPokemonData(LIST_URL);
-
-                if (cachedPokemonList) {
-                    setPokemonList(cachedPokemonList);
-                }
-            } else {
-                const callPokemon = await getPokemonData(LIST_URL, useCache);
-                setPokemonList(callPokemon);
-            }
-            // const callPokemon = await getPokemonData(LIST_URL, useCache);
-            // setPokemonList(callPokemon);
-        };
-
-        callApi();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    const getDetailInfo = (pokemonInfo: Object) => {
+        setDetailInfo(pokemonInfo);
+    };
 
     return (
-        <div className="container mx-auto">
-            <div className="grid grid-cols-4 gap-4">
-                {pokemonList[`results`].map(
-                    (pokemonList: Pokemon, index: number) => {
-                        return (
-                            <Card
-                                key={`${pokemonList.name}-${index}`}
-                                {...pokemonList}
-                                url={pokemonList.url}
-                                useCache={true}
-                            />
-                        );
-                    }
-                )}
+        <div className="page-container flex relative">
+            <div className="detail-list-container flex flex-row">
+                <div className="header-list-container-lg px-10">
+                    <Header />
+                    <div className="card-container flex flex-row flex-wrap justify-between gap-6 xl:gap-10">
+                        {!pokemonList ? (
+                            <div>No Pokemon List to Render</div>
+                        ) : (
+                            pokemonList.map((pokemon: any, index: number) => {
+                                return (
+                                    <Card
+                                        key={`${pokemon[`name`]}-${index}`}
+                                        {...pokemon}
+                                        useCache={false}
+                                        pokemonInfo={getDetailInfo}
+                                        onClick={() => {
+                                            setShowDetail(true);
+                                        }}
+                                    />
+                                );
+                            })
+                        )}
+                    </div>
+                </div>
+                {showDetail ? (
+                    <div
+                        className="detail-container pr-8"
+                        onClick={() => setShowDetail(false)}
+                    >
+                        <Detail
+                            onClick={() => setShowModal(true)}
+                            {...detailInfo}
+                        />
+                    </div>
+                ) : null}
             </div>
+            {showModal ? (
+                <div className="modal-container absolute w-full h-full bg-black/60">
+                    <Modal
+                        onClick={() => {
+                            setShowModal(false);
+                        }}
+                        {...detailInfo}
+                    />
+                </div>
+            ) : null}
         </div>
     );
 }

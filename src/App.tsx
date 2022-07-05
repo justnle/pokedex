@@ -1,12 +1,18 @@
-import React from 'react';
-import List from './components/List';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import Captured from './pages/Captured';
 import './App.css';
 
 function App() {
     return (
-        <div className="App">
-            <List useCache={true} />
-        </div>
+        <Router>
+            <div className="App container-xl">
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/captured" element={<Captured />} />
+                </Routes>
+            </div>
+        </Router>
     );
 }
 
