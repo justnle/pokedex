@@ -6,12 +6,8 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 const API_URL_FIRST_20 = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=0`;
 
 export default function Scroll({ useCache }: { useCache: boolean }) {
-    const [pokemonList, setPokemonList] = useState<Array<Object>>(
-        getCachedPokemonData(API_URL_FIRST_20)[`results`] || []
-    );
-    const [nextPokemonList, setNextPokemonList] = useState<Array<Object>>(
-        getCachedPokemonData(API_URL_FIRST_20)[`next`] || []
-    );
+    const [pokemonList, setPokemonList] = useState<Array<Object>>([]);
+    const [nextPokemonList, setNextPokemonList] = useState<Array<Object>>([]);
 
     useEffect(() => {
         const getData = async (url: string) => {
@@ -47,7 +43,7 @@ export default function Scroll({ useCache }: { useCache: boolean }) {
             hasMore={true}
             loader={<h4>Loading..</h4>}
         >
-            <List pokemonList={pokemonList} useCache={true} />
+            <List pokemonList={pokemonList} useCache={false} />
         </InfiniteScroll>
     );
 }
