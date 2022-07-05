@@ -51,7 +51,15 @@ export default function List(props: Props): JSX.Element {
                 {showDetail ? (
                     <div
                         className="detail-container pr-8"
-                        onClick={() => setShowDetail(false)}
+                        onClick={(event) => {
+                            const button = document.querySelector(
+                                `.detail-capture-button`
+                            );
+
+                            if (event.target !== button) {
+                                setShowDetail(false);
+                            }
+                        }}
                     >
                         <Detail
                             onClick={() => setShowModal(true)}
