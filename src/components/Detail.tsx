@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react';
 import { typeColor } from '../utils/backgrounds';
 import { formatDate } from '../utils/date';
 
-export default function Detail(props: any) {
+type Props = {
+    onClick?: () => void;
+    props?: Object;
+};
+
+export default function Detail(props: Props): JSX.Element {
     const [captured, setCaptured] = useState(false);
     const [capturedPokemon, setCapturedPokemon] = useState([]);
 
@@ -16,7 +21,6 @@ export default function Detail(props: any) {
             } else {
                 setCaptured(false);
             }
-            console.log();
         };
 
         checkCaptured();

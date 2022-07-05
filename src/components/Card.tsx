@@ -2,13 +2,20 @@ import { useState, useEffect } from 'react';
 import { getCachedPokemonData, getPokemonData } from '../utils/request';
 import { typeColor } from '../utils/backgrounds';
 
-const Card = (props: any) => {
+type Props = {
+    url: string;
+    name: string;
+    useCache?: boolean;
+    pokemonInfo: (data: Object) => void;
+    onClick: () => void;
+};
+
+const Card = (props: Props): JSX.Element => {
     const [pokemonInfo, setPokemonInfo] = useState<Array<Object>>([]);
 
     useEffect(() => {
         const fetchPokemonData = async () => {
             if (props.useCache) {
-                console.log(`using cache`);
                 const cachedPokemonData = getCachedPokemonData(props.url);
 
                 if (cachedPokemonData) {
