@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { getCachedPokemonData, getPokemonData } from '../utils/request';
 import List from './List';
-import InfiniteScroll from 'react-infinite-scroll-component';
 
-const API_URL_FIRST_20 = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=0`;
+const API_URL_FIRST_30 = `https://pokeapi.co/api/v2/pokemon?limit=30&offset=0`;
 
 export default function Scroll({
     useCache
@@ -14,40 +13,42 @@ export default function Scroll({
     const [nextPokemonList, setNextPokemonList] = useState<Array<Object>>([]);
 
     useEffect(() => {
-        const getData = async (url: string) => {
+        const getData = async () => {
             if (useCache) {
                 const cachedPokemonList =
-                    getCachedPokemonData(API_URL_FIRST_20);
+                    getCachedPokemonData(API_URL_FIRST_30);
 
                 if (cachedPokemonList) {
                     setPokemonList(cachedPokemonList[`results`]);
                     setNextPokemonList(cachedPokemonList);
                 }
             } else {
-                const fetchPokemon = await getPokemonData(url, useCache);
-                setPokemonList(fetchPokemon[`results`]);
-                setNextPokemonList(fetchPokemon);
+                const fetchPokemon = await getPokemonData(
+                    API_URL_FIRST_30,
+                    useCache
+                );
+                setPokemonList(fetchPokemon);
             }
         };
 
-        getData(API_URL_FIRST_20);
+        if (pokemonList.length === 0) {
+            getData();
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [nextPokemonList]);
 
     const updatePokemonList = async () => {
-        const newPokemon = await getPokemonData(nextPokemonList[`next`], false);
+        const newPokemon = await getPokemonData(pokemonList[`next`], false);
         setNextPokemonList(newPokemon);
-        setPokemonList([...pokemonList, ...newPokemon[`results`]]);
+        setPokemonList(newPokemon);
     };
 
     return (
-        <InfiniteScroll
-            dataLength={pokemonList.length}
-            next={updatePokemonList}
-            hasMore={true}
-            loader={<h4>Loading..</h4>}
-        >
-            <List pokemonList={pokemonList} useCache={false} />
-        </InfiniteScroll>
+        <div className="page pb-10">
+            <List pokemonList={pokemonList[`results`]} useCache={false} />
+            <div className="text-center text-[28px]">
+                <button onClick={() => updatePokemonList()}>Next Page</button>
+            </div>
+        </div>
     );
 }
