@@ -77,11 +77,13 @@ export default function Modal(props: { onClick: () => void }): JSX.Element {
                         disabled
                     ></input>
                 </div>
-                <div
-                    className="capture-button bg-red-500 rounded-[100px] text-white text-[18px] font-semibold"
-                    onClick={() => capturePokemon()}
-                >
-                    <h2 className="text-center py-3">Capture</h2>
+                <div className="modal-capture-button-container flex justify-center h-[53px]">
+                    <button
+                        className="modal-capture-button w-full bg-red-500 text-white text-[18px] font-[590] rounded-[100px]"
+                        onClick={() => capturePokemon()}
+                    >
+                        Capture
+                    </button>
                 </div>
             </div>
         </div>
