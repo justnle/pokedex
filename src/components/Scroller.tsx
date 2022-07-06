@@ -11,6 +11,10 @@ export default function Scroll({
 }): JSX.Element {
     const [pokemonList, setPokemonList] = useState<Array<Object>>([]);
     const [nextPokemonList, setNextPokemonList] = useState<Array<Object>>([]);
+    const [previousPokemonList, setPreviousPokemonList] = useState<
+        Array<Object>
+    >([]);
+    const [showPrevious, setShowPrevious] = useState<Boolean>(false);
 
     useEffect(() => {
         const getData = async () => {
@@ -41,12 +45,28 @@ export default function Scroll({
         const newPokemon = await getPokemonData(pokemonList[`next`], false);
         setNextPokemonList(newPokemon);
         setPokemonList(newPokemon);
+        setShowPrevious(true);
+    };
+
+    const updatePreviousPokemonList = async () => {
+        const oldPokemon = await getPokemonData(pokemonList[`previous`], false);
+        setPreviousPokemonList(oldPokemon);
+        setPokemonList(oldPokemon);
+
+        if (!oldPokemon[`previous`]) {
+            setShowPrevious(false);
+        }
     };
 
     return (
         <div className="page pb-10">
             <List pokemonList={pokemonList[`results`]} useCache={false} />
-            <div className="text-center text-[28px]">
+            <div className="pagination-container text-center text-[28px]">
+                {showPrevious ? (
+                    <button onClick={() => updatePreviousPokemonList()}>
+                        Previous Page
+                    </button>
+                ) : null}
                 <button onClick={() => updatePokemonList()}>Next Page</button>
             </div>
         </div>
