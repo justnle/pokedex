@@ -81,7 +81,7 @@ export default function List(props: Props): JSX.Element {
                 ) : null}
             </div>
             {showModal ? (
-                <div className="modal-container absolute w-full h-full bg-black/60">
+                <div className="modal-container fixed top-0 w-full h-full bg-black/60">
                     <Modal
                         onClick={() => {
                             setShowModal(false);
