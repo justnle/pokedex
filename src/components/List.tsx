@@ -19,12 +19,16 @@ export default function List(props: Props): JSX.Element {
     useEffect(() => {
         setPokemonList(props.pokemonList);
 
-        const capturedPokemonList = localStorage.getItem('capturedPokemon');
+        const getCaptureData = () => {
+            const capturedPokemonList = localStorage.getItem(`capturedPokemon`);
 
-        if (capturedPokemonList) {
-            setCapturedPokemon(JSON.parse(capturedPokemonList));
-        }
-    }, [props.pokemonList]);
+            if (capturedPokemonList) {
+                setCapturedPokemon(JSON.parse(capturedPokemonList));
+            }
+        };
+
+        getCaptureData();
+    }, [props.pokemonList, showModal]);
 
     const getDetailInfo = (pokemonInfo: Object) => {
         setDetailInfo(pokemonInfo);
