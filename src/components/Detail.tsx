@@ -35,7 +35,7 @@ export default function Detail(props: Props): JSX.Element {
 
     return (
         <div
-            className="about-stats-container shadow-detail-card rounded-t-[44px] fixed bottom-0 right-0"
+            className="about-stats-container shadow-detail-card rounded-t-[44px] fixed bottom-0 right-[22px]"
             style={{
                 backgroundColor: typeColor[props[`types`][0][`type`][`name`]]
             }}
