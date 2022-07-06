@@ -14,9 +14,16 @@ export default function List(props: Props): JSX.Element {
     const [showDetail, setShowDetail] = useState<Boolean>(false);
     const [detailInfo, setDetailInfo] = useState<Object>({});
     const [showModal, setShowModal] = useState<Boolean>(false);
+    const [capturedPokemon, setCapturedPokemon] = useState([]);
 
     useEffect(() => {
         setPokemonList(props.pokemonList);
+
+        const capturedPokemonList = localStorage.getItem('capturedPokemon');
+
+        if (capturedPokemonList) {
+            setCapturedPokemon(JSON.parse(capturedPokemonList));
+        }
     }, [props.pokemonList]);
 
     const getDetailInfo = (pokemonInfo: Object) => {
@@ -24,8 +31,8 @@ export default function List(props: Props): JSX.Element {
     };
 
     return (
-        <div className="page-container flex relative">
-            <div className="detail-list-container flex flex-row">
+        <div className="page-container">
+            <div className="detail-list-container flex">
                 <div className="header-list-container-lg px-10">
                     <Header catchButton={true} />
                     <div className="card-container flex flex-row flex-wrap justify-between gap-6 xl:gap-10">
@@ -64,6 +71,7 @@ export default function List(props: Props): JSX.Element {
                         <Detail
                             onClick={() => setShowModal(true)}
                             {...detailInfo}
+                            captured={capturedPokemon}
                         />
                     </div>
                 ) : null}
