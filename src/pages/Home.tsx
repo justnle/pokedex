@@ -53,15 +53,19 @@ export default function Home({ useCache }: { useCache: boolean }): JSX.Element {
     return (
         <div className="home-container pb-10">
             <List pokemonList={pokemonList[`results`]} useCache={false} />
-            <div className="pagination-button-container text-center text-[28px]">
+            <div className="pagination-button-container flex justify-around text-center text-[28px]">
                 {showPrevious ? (
-                    <button onClick={() => updatePreviousPokemonList()}>
-                        <b>Previous Page</b>
-                    </button>
+                    <div className="previous-button-container">
+                        <button onClick={() => updatePreviousPokemonList()}>
+                            <b>Previous Page</b>
+                        </button>
+                    </div>
                 ) : null}
-                <button onClick={() => updatePokemonList()}>
-                    <b>Next Page</b>
-                </button>
+                <div className="next-button-container">
+                    <button onClick={() => updatePokemonList()}>
+                        <b>Next Page</b>
+                    </button>
+                </div>
             </div>
         </div>
     );
