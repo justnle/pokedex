@@ -60,10 +60,12 @@ export default function Scroll({
             <div className="pagination-container text-center text-[28px]">
                 {showPrevious ? (
                     <button onClick={() => updatePreviousPokemonList()}>
-                        Previous Page
+                        <b>Previous Page</b>
                     </button>
                 ) : null}
-                <button onClick={() => updatePokemonList()}>Next Page</button>
+                <button onClick={() => updatePokemonList()}>
+                    <b>Next Page</b>
+                </button>
             </div>
         </div>
     );
