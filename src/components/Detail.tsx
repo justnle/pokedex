@@ -5,13 +5,12 @@ import { formatDate } from '../utils/date';
 type Props = {
     onClick?: () => void;
     props?: Object;
-    captured?: Object;
+    captured: Object;
 };
 
 export default function Detail(props: Props): JSX.Element {
     const [captured, setCaptured] = useState(false);
     const [capturedPokemon, setCapturedPokemon] = useState([]);
-    const [capturedPokemonList, setCapturedPokemonList] = useState({});
 
     useEffect(() => {
         const checkCaptured = () => {
@@ -23,15 +22,11 @@ export default function Detail(props: Props): JSX.Element {
             } else {
                 setCaptured(false);
             }
-
-            if (props.captured) {
-                setCapturedPokemonList(props.captured);
-            }
         };
 
         checkCaptured();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props[`name`], capturedPokemonList]);
+    }, [props[`name`], props.captured]);
 
     return (
         <div className="about-stats-container shadow-detail-card rounded-t-[44px] fixed bottom-0 right-[22px] bg-white overflow-hidden">
