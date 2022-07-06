@@ -57,7 +57,7 @@ export default function List(props: Props): JSX.Element {
                 </div>
                 {showDetail ? (
                     <div
-                        className="detail-container pr-8"
+                        className="detail-container m-height-[1px] w-[1800px]"
                         onClick={(event) => {
                             const button = document.querySelector(
                                 `.detail-capture-button`
