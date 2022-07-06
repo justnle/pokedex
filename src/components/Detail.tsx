@@ -133,13 +133,13 @@ export default function Detail(props: Props): JSX.Element {
                         </div>
                     </div>
                 ) : (
-                    <div
-                        className="detail-capture-button-container h-[53px] bg-pokemon-red rounded-[100px] mx-auto text-white text-[18px] font-semibold ease-out duration-300"
-                        onClick={props.onClick}
-                    >
-                        <h2 className="detail-capture-button text-center py-3">
+                    <div className="detail-capture-button-container flex h-[53px] justify-center mx-auto text-white text-[18px] font-semibold ease-out duration-300">
+                        <button
+                            className="detail-capture-button w-full bg-pokemon-red rounded-[100px]"
+                            onClick={props.onClick}
+                        >
                             Capture
-                        </h2>
+                        </button>
                     </div>
                 )}
             </div>
