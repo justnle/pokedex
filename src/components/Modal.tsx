@@ -39,7 +39,7 @@ export default function Modal(props: { onClick: () => void }): JSX.Element {
     };
 
     return (
-        <div className="modal flex flex-col items-center justify-center h-screen">
+        <div className="modal flex flex-col items-center justify-center h-full">
             <div className="modal-contents w-[348px] px-[24px] py-[32px] bg-white rounded-[16px]">
                 <div className="pokemon-name">
                     <h2 className="text-[32px]">
