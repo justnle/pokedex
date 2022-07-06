@@ -69,7 +69,10 @@ export default function List(props: Props): JSX.Element {
                         }}
                     >
                         <Detail
-                            onClick={() => setShowModal(true)}
+                            onClick={() => {
+                                setShowModal(true);
+                                document.body.style.overflow = 'hidden';
+                            }}
                             {...detailInfo}
                             captured={capturedPokemon}
                         />
@@ -81,6 +84,7 @@ export default function List(props: Props): JSX.Element {
                     <Modal
                         onClick={() => {
                             setShowModal(false);
+                            document.body.style.overflow = 'unset';
                         }}
                         {...detailInfo}
                     />
