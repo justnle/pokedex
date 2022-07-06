@@ -31,7 +31,7 @@ export default function List(props: Props): JSX.Element {
     };
 
     return (
-        <div className="page-container">
+        <div className="main-container pb-10 flex">
             <div className="detail-list-container flex">
                 <div className="header-list-container-lg px-10">
                     <Header catchButton={true} />
