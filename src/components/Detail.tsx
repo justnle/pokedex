@@ -34,13 +34,14 @@ export default function Detail(props: Props): JSX.Element {
     }, [props[`name`], capturedPokemonList]);
 
     return (
-        <div
-            className="about-stats-container shadow-detail-card rounded-t-[44px] fixed bottom-0 right-[22px]"
-            style={{
-                backgroundColor: typeColor[props[`types`][0][`type`][`name`]]
-            }}
-        >
-            <div className="picture-container h-[275] w-[360px] py-[48px]">
+        <div className="about-stats-container shadow-detail-card rounded-t-[44px] fixed bottom-0 right-[22px] bg-white overflow-hidden">
+            <div
+                className="picture-container h-[275] w-[360px] py-[48px]"
+                style={{
+                    backgroundColor:
+                        typeColor[props[`types`][0][`type`][`name`]]
+                }}
+            >
                 <img
                     src={
                         props[`sprites`][`other`][`official-artwork`][
@@ -58,7 +59,7 @@ export default function Detail(props: Props): JSX.Element {
                     </b>
                 </h1>
             </div>
-            <div className="info-container bg-white pt-[32px] pb-[24px]">
+            <div className="info-container pt-[32px] pb-[24px]">
                 <div className="about-container mx-auto w-[326px] rounded-[16px] shadow-detail-box p-[16px]">
                     <h2 className="text-[18px]">
                         <b>About</b>
@@ -113,7 +114,7 @@ export default function Detail(props: Props): JSX.Element {
                     </div>
                 </div>
             </div>
-            <div className="capture-container px-4 pb-6 bg-white">
+            <div className="capture-container px-4 pb-6">
                 {captured ? (
                     <div className="capture-info mx-auto rounded-[16px] shadow-detail-box p-[16px]">
                         <h2 className="text-[18px] pb-[10px]">
