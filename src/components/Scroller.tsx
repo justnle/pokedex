@@ -11,9 +11,6 @@ export default function Scroll({
 }): JSX.Element {
     const [pokemonList, setPokemonList] = useState<Array<Object>>([]);
     const [nextPokemonList, setNextPokemonList] = useState<Array<Object>>([]);
-    const [previousPokemonList, setPreviousPokemonList] = useState<
-        Array<Object>
-    >([]);
     const [showPrevious, setShowPrevious] = useState<Boolean>(false);
 
     useEffect(() => {
@@ -50,7 +47,6 @@ export default function Scroll({
 
     const updatePreviousPokemonList = async () => {
         const oldPokemon = await getPokemonData(pokemonList[`previous`], false);
-        setPreviousPokemonList(oldPokemon);
         setPokemonList(oldPokemon);
 
         if (!oldPokemon[`previous`]) {
