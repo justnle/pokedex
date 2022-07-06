@@ -11,9 +11,9 @@ export default function Header(props: { catchButton: boolean }): JSX.Element {
                 </div>
             </Link>
             {props.catchButton ? (
-                <div className="button-container my-auto h-[72px] w-[420px]">
+                <div className="button-container my-auto h-[72px] w-[420px] rounded-[100px] overflow-hidden">
                     <Link to="/captured">
-                        <div className="captured-button flex flex-row bg-pokemon-red rounded-[100px]">
+                        <div className="captured-button flex flex-row bg-pokemon-red">
                             <div className="pokeball">
                                 <img
                                     src={pokeball}
