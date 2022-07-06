@@ -1,7 +1,10 @@
-import { toISOStringWithTimezone } from '../utils/date';
+import { useEffect, useState } from 'react';
+import { formatDate, toISOStringWithTimezone } from '../utils/date';
 
-export default function Modal(props: { onClick: () => void }): JSX.Element {
-    const capturePokemon = () => {
+export default function Modal(props: any): JSX.Element {
+    const [fillModal, setFillModal] = useState({ date: '', level: '' });
+
+    const capturePokemon = (time: string, level: string) => {
         const nicknameElement = document.getElementById(
             `nickname`
         ) as HTMLInputElement;
@@ -12,8 +15,8 @@ export default function Modal(props: { onClick: () => void }): JSX.Element {
                 nicknameElement.value.length > 1
                     ? nicknameElement.value
                     : `None`,
-            captured_date: toISOStringWithTimezone(new Date()),
-            captured_level: Math.floor(Math.random() * 101),
+            captured_date: time,
+            captured_level: level,
             pokemon_detail: props
         };
 
@@ -38,6 +41,13 @@ export default function Modal(props: { onClick: () => void }): JSX.Element {
         props.onClick();
     };
 
+    const autoFill = () => {
+        setFillModal({
+            date: toISOStringWithTimezone(new Date()),
+            level: Math.floor(Math.random() * 101).toString()
+        });
+    };
+
     return (
         <div className="modal flex flex-col items-center justify-center h-full">
             <div className="modal-contents w-[348px] px-[24px] py-[32px] bg-white rounded-[16px]">
@@ -59,12 +69,17 @@ export default function Modal(props: { onClick: () => void }): JSX.Element {
                         maxLength={12}
                         placeholder="Nickname"
                         className="w-full rounded-md my-1 pl-2 py-1 text-[18px] border border-black"
+                        onClick={() => {
+                            console.log(`test`);
+                            autoFill();
+                        }}
                     ></input>
                     <input
                         type="text"
                         id="capture-date"
                         name="capture-date"
                         placeholder="Captured Date"
+                        value={fillModal.date ? fillModal.date : ``}
                         className="w-full rounded-md my-1 pl-2 py-1 text-[18px] border border-black"
                         disabled
                     ></input>
@@ -73,6 +88,7 @@ export default function Modal(props: { onClick: () => void }): JSX.Element {
                         id="capture-level"
                         name="capture-level"
                         placeholder="Captured Level"
+                        value={fillModal.level ? fillModal.level : ``}
                         className="w-full rounded-md my-1 pl-2 py-1 text-[18px] border border-black"
                         disabled
                     ></input>
@@ -80,7 +96,9 @@ export default function Modal(props: { onClick: () => void }): JSX.Element {
                 <div className="modal-capture-button-container flex justify-center h-[53px]">
                     <button
                         className="modal-capture-button w-full bg-red-500 text-white text-[18px] font-[590] rounded-[100px]"
-                        onClick={() => capturePokemon()}
+                        onClick={() =>
+                            capturePokemon(fillModal.date, fillModal.level)
+                        }
                     >
                         Capture
                     </button>
