@@ -7,7 +7,7 @@ function App() {
         <Router>
             <div className="App container-xl">
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<Home useCache={false} />} />
                     <Route path="/captured" element={<Captured />} />
                 </Routes>
             </div>
