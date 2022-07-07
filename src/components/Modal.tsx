@@ -89,7 +89,9 @@ export default function Modal(props: Props): JSX.Element {
                         name="capture-date"
                         placeholder="Captured Date"
                         defaultValue={
-                            fillModal.captured_date ? formatDate(fillModal) : ``
+                            fillModal.captured_date
+                                ? fillModal.captured_date.slice(0, 10)
+                                : ``
                         }
                         className="w-full rounded-md my-1 pl-2 py-1 text-[18px] border border-black"
                         disabled
