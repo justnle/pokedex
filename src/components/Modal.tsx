@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { formatDate, toISOStringWithTimezone } from '../utils/date';
 
 type Props = {
@@ -12,7 +12,15 @@ export default function Modal(props: Props): JSX.Element {
         captured_level: ''
     });
 
-    const capturePokemon = (time: string, level: string) => {
+    const [button, enableButton] = useState(false);
+
+    const capturePokemon = (
+        time: string,
+        level: string,
+        event: React.SyntheticEvent
+    ) => {
+        event.preventDefault();
+
         const nicknameElement = document.getElementById(
             `nickname`
         ) as HTMLInputElement;
@@ -56,6 +64,8 @@ export default function Modal(props: Props): JSX.Element {
             captured_date: date,
             captured_level: Math.floor(Math.random() * 101).toString()
         });
+
+        enableButton(true);
     };
 
     return (
@@ -70,59 +80,67 @@ export default function Modal(props: Props): JSX.Element {
                         </b>
                     </h2>
                 </div>
-                <div className="capture-details py-5">
-                    <input
-                        type="text"
-                        id="nickname"
-                        name="nickname"
-                        minLength={1}
-                        maxLength={12}
-                        placeholder="Nickname"
-                        className="w-full rounded-md my-1 pl-2 py-1 text-[18px] border border-black"
-                        onClick={() => {
-                            autoFill();
-                        }}
-                    ></input>
-                    <input
-                        type="text"
-                        id="capture-date"
-                        name="capture-date"
-                        placeholder="Captured Date"
-                        defaultValue={
-                            fillModal.captured_date
-                                ? fillModal.captured_date.slice(0, 10)
-                                : ``
-                        }
-                        className="w-full rounded-md my-1 pl-2 py-1 text-[18px] border border-black"
-                        disabled
-                    ></input>
-                    <input
-                        type="text"
-                        id="capture-level"
-                        name="capture-level"
-                        placeholder="Captured Level"
-                        defaultValue={
-                            fillModal.captured_level
-                                ? fillModal.captured_level
-                                : ``
-                        }
-                        className="w-full rounded-md my-1 pl-2 py-1 text-[18px] border border-black"
-                        disabled
-                    ></input>
-                </div>
-                <div className="modal-capture-button-container flex justify-center h-[53px]">
-                    <button
-                        className="modal-capture-button w-full bg-red-500 text-white text-[18px] font-[590] rounded-[100px]"
-                        onClick={() =>
-                            capturePokemon(
-                                fillModal.captured_date,
+                <form
+                    onSubmit={(event) => {
+                        capturePokemon(
+                            fillModal.captured_date,
+                            fillModal.captured_level,
+                            event
+                        );
+                    }}
+                >
+                    <div className="capture-details py-5">
+                        <input
+                            type="text"
+                            id="nickname"
+                            name="nickname"
+                            minLength={1}
+                            maxLength={12}
+                            placeholder="Nickname"
+                            className="w-full rounded-md my-1 pl-2 py-1 text-[18px] border border-black"
+                            onClick={() => {
+                                autoFill();
+                            }}
+                        ></input>
+                        <input
+                            type="text"
+                            id="capture-date"
+                            name="capture-date"
+                            placeholder="Captured Date"
+                            defaultValue={
+                                fillModal.captured_date
+                                    ? fillModal.captured_date.slice(0, 10)
+                                    : ``
+                            }
+                            className="w-full rounded-md my-1 pl-2 py-1 text-[18px] border border-black"
+                            disabled
+                            required
+                        ></input>
+                        <input
+                            type="text"
+                            id="capture-level"
+                            name="capture-level"
+                            placeholder="Captured Level"
+                            defaultValue={
                                 fillModal.captured_level
-                            )
-                        }
-                    >
-                        Capture
-                    </button>
-                </div>
+                                    ? fillModal.captured_level
+                                    : ``
+                            }
+                            className="w-full rounded-md my-1 pl-2 py-1 text-[18px] border border-black"
+                            disabled
+                            required
+                        ></input>
+                    </div>
+                    <div className="modal-capture-button-container flex justify-center h-[53px]">
+                        <button
+                            className="modal-capture-button w-full bg-red-500 text-white text-[18px] font-[590] rounded-[100px]"
+                            type="submit"
+                            disabled={!button}
+                        >
+                            Capture
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     );
