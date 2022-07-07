@@ -12,7 +12,7 @@ const formatDate = (pokemon: Object): string => {
     }
 };
 
-const toISOStringWithTimezone = (date: Date) => {
+const toISOStringWithTimezone = (date: Date): string => {
     const timeZoneOffset = -date.getTimezoneOffset();
     const diff = timeZoneOffset >= 0 ? `+` : `-`;
     const pad = (num: number) =>
