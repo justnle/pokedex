@@ -1,4 +1,4 @@
-const formatDate = (pokemon: Object) => {
+const formatDate = (pokemon: Object): string => {
     if (pokemon[`captured_date`]) {
         const formattedDate = pokemon[`captured_date`],
             [yyyy, mm, dd] = formattedDate.split(/[/:\-T]/);
@@ -7,6 +7,8 @@ const formatDate = (pokemon: Object) => {
         const month = date.toLocaleString('default', { month: 'long' });
 
         return `${month} ${dd}, ${yyyy}`;
+    } else {
+        return ``;
     }
 };
 
