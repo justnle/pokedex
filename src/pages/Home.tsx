@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getPokemonData } from '../utils/request';
 import List from '../components/List';
 
-const API_URL_FIRST_30 = `https://pokeapi.co/api/v2/pokemon?limit=30&offset=0`;
+const baseURL = `https://pokeapi.co/api/v2/pokemon?limit=30&offset=0`;
 
 export default function Home(): JSX.Element {
     const [pokemonList, setPokemonList] = useState<Array<Object>>([]);
@@ -11,7 +11,7 @@ export default function Home(): JSX.Element {
 
     useEffect(() => {
         const getData = async () => {
-            const fetchPokemon = await getPokemonData(API_URL_FIRST_30);
+            const fetchPokemon = await getPokemonData(baseURL);
             setPokemonList(fetchPokemon);
         };
 
