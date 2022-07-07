@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { formatDate, toISOStringWithTimezone } from '../utils/date';
 
-export default function Modal(props: any): JSX.Element {
+type Props = {
+    onClick: () => void;
+    props?: Object;
+};
+
+export default function Modal(props: Props): JSX.Element {
     const [fillModal, setFillModal] = useState({
         captured_date: '',
         captured_level: ''
