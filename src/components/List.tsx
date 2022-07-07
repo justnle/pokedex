@@ -5,7 +5,6 @@ import Header from './Header';
 import Modal from './Modal';
 
 type Props = {
-    useCache: boolean;
     pokemonList: Array<Object>;
 };
 
@@ -48,7 +47,6 @@ export default function List(props: Props): JSX.Element {
                                     <Card
                                         key={`${pokemon[`name`]}-${index}`}
                                         {...pokemon}
-                                        useCache={false}
                                         pokemonInfo={getDetailInfo}
                                         onClick={() => {
                                             setShowDetail(true);

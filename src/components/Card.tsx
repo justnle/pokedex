@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { getCachedPokemonData, getPokemonData } from '../utils/request';
+import { getPokemonData } from '../utils/request';
 import { typeColor } from '../utils/backgrounds';
 
 type Props = {
     url: string;
     name: string;
-    useCache?: boolean;
     pokemonInfo: (data: Object) => void;
     onClick: () => void;
 };
@@ -15,16 +14,8 @@ const Card = (props: Props): JSX.Element => {
 
     useEffect(() => {
         const fetchPokemonData = async () => {
-            if (props.useCache) {
-                const cachedPokemonData = getCachedPokemonData(props.url);
-
-                if (cachedPokemonData) {
-                    setPokemonInfo(cachedPokemonData);
-                }
-            } else {
-                const getInfo = await getPokemonData(props.url, props.useCache);
-                setPokemonInfo(getInfo);
-            }
+            const getInfo = await getPokemonData(props.url);
+            setPokemonInfo(getInfo);
         };
 
         fetchPokemonData();

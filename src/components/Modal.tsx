@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { formatDate, toISOStringWithTimezone } from '../utils/date';
 
 export default function Modal(props: any): JSX.Element {
