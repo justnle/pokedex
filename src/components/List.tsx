@@ -83,7 +83,17 @@ export default function List(props: Props): JSX.Element {
                 ) : null}
             </div>
             {showModal ? (
-                <div className="modal-container fixed top-0 w-full h-full bg-black/60">
+                <div
+                    className="modal-container fixed top-0 w-full h-full bg-black/60"
+                    onClick={(event) => {
+                        const modal = document.querySelector(`.modal`);
+
+                        if (event.target === modal) {
+                            setShowModal(false);
+                            document.body.style.overflow = 'unset';
+                        }
+                    }}
+                >
                     <Modal
                         onClick={() => {
                             setShowModal(false);
