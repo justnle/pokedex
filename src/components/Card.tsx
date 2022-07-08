@@ -23,7 +23,7 @@ const Card = (props: Props): JSX.Element => {
     }, []);
 
     return (
-        <div
+        <button
             className="pokemon-card w-[333px]"
             onClick={() => {
                 props.pokemonInfo(pokemonInfo);
@@ -81,7 +81,7 @@ const Card = (props: Props): JSX.Element => {
                     </div>
                 </div>
             )}
-        </div>
+        </button>
     );
 };
 
