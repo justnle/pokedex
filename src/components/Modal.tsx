@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { formatDate, toISOStringWithTimezone } from '../utils/date';
+import { toISOStringWithTimezone } from '../utils/date';
+import ModalForm from './ModalForm';
 
 type Props = {
     onClick: () => void;
@@ -74,75 +75,18 @@ export default function Modal(props: Props): JSX.Element {
         <div className="modal flex flex-col items-center justify-center h-full">
             <div className="modal-contents w-[348px] px-[24px] py-[32px] bg-white rounded-[16px]">
                 <div className="pokemon-name">
-                    <h2 className="text-[32px]">
-                        <b className="font-semibold">
-                            Capturing{' '}
-                            {props[`name`].charAt(0).toUpperCase() +
-                                props[`name`].slice(1)}
-                        </b>
+                    <h2 className="text-[32px] font-[590]">
+                        Capturing{' '}
+                        {props[`name`].charAt(0).toUpperCase() +
+                            props[`name`].slice(1)}
                     </h2>
                 </div>
-                <form
-                    onSubmit={(event) => {
-                        capturePokemon(
-                            fillModal.captured_date,
-                            fillModal.captured_level,
-                            event
-                        );
-                    }}
-                >
-                    <div className="capture-details py-5">
-                        <input
-                            type="text"
-                            id="nickname"
-                            name="nickname"
-                            minLength={1}
-                            maxLength={12}
-                            placeholder="Nickname"
-                            className="w-full rounded-md my-1 pl-2 py-1 text-[18px] border border-black"
-                            onClick={() => {
-                                autoFill();
-                            }}
-                        ></input>
-                        <input
-                            type="text"
-                            id="capture-date"
-                            name="capture-date"
-                            placeholder="Captured Date"
-                            defaultValue={
-                                fillModal.captured_date
-                                    ? fillModal.captured_date.slice(0, 10)
-                                    : ``
-                            }
-                            className="w-full rounded-md my-1 pl-2 py-1 text-[18px] border border-black"
-                            disabled
-                            required
-                        ></input>
-                        <input
-                            type="text"
-                            id="capture-level"
-                            name="capture-level"
-                            placeholder="Captured Level"
-                            defaultValue={
-                                fillModal.captured_level
-                                    ? fillModal.captured_level
-                                    : ``
-                            }
-                            className="w-full rounded-md my-1 pl-2 py-1 text-[18px] border border-black"
-                            disabled
-                            required
-                        ></input>
-                    </div>
-                    <div className="modal-capture-button-container flex justify-center h-[53px]">
-                        <button
-                            className="modal-capture-button w-full bg-red-500 text-white text-[18px] font-[590] rounded-[100px]"
-                            type="submit"
-                            disabled={!button}
-                        >
-                            Capture
-                        </button>
-                    </div>
-                </form>
+                <ModalForm
+                    capture={capturePokemon}
+                    autoFill={autoFill}
+                    {...fillModal}
+                    buttonState={!button}
+                />
             </div>
         </div>
     );
