@@ -54,12 +54,10 @@ const Card = (props: Props): JSX.Element => {
                         />
                     </div>
                     <div className="pokemon-info flex flex-col items-start pt-[8px] pr-[8px] pb-[16px] pl-[16px]">
-                        <div className="pokemon-name flex self-stretch text-[28px] text-dark-gray">
-                            <b>
-                                #{pokemonInfo[`id`].toString().padStart(3, '0')}{' '}
-                                {pokemonInfo[`name`].charAt(0).toUpperCase() +
-                                    props.name.slice(1)}
-                            </b>
+                        <div className="pokemon-name flex self-stretch text-[28px] text-dark-gray font-bold">
+                            #{pokemonInfo[`id`].toString().padStart(3, '0')}{' '}
+                            {pokemonInfo[`name`].charAt(0).toUpperCase() +
+                                props.name.slice(1)}
                         </div>
                         <div className="pokemon-type flex flex-row self-stretch text-[24px] text-medium-gray">
                             {pokemonInfo[`types`]

@@ -46,19 +46,15 @@ export default function Detail(props: Props): JSX.Element {
                     alt={props[`name`]}
                     className="h-[140px] w-[140px] mx-auto"
                 />
-                <h1 className="text-center">
-                    <b className="text-white text-[26px]">
-                        #{props[`id`].toString().padStart(3, '0')}{' '}
-                        {props[`name`].charAt(0).toUpperCase() +
-                            props[`name`].slice(1)}
-                    </b>
-                </h1>
+                <h2 className="text-center text-white text-[26px] font-bold">
+                    #{props[`id`].toString().padStart(3, '0')}{' '}
+                    {props[`name`].charAt(0).toUpperCase() +
+                        props[`name`].slice(1)}
+                </h2>
             </div>
             <div className="info-container pt-[32px] pb-[24px]">
                 <div className="about-container mx-auto w-[326px] rounded-[16px] shadow-detail-box p-[16px]">
-                    <h2 className="text-[18px]">
-                        <b>About</b>
-                    </h2>
+                    <h2 className="text-[18px] font-bold">About</h2>
                     <div className="about-info text-[15px]">
                         <div className="pokemon-types py-[10px]">
                             Type(s):{' '}
@@ -84,8 +80,8 @@ export default function Detail(props: Props): JSX.Element {
                 </div>
                 <div className="pt-[24px]">
                     <div className="stats-container mx-auto w-[326px] rounded-[16px] shadow-detail-box p-[16px]">
-                        <h2 className="text-[18px] pb-[10px]">
-                            <b>Base Stats</b>
+                        <h2 className="text-[18px] pb-[10px] font-bold">
+                            Base Stats
                         </h2>
                         <div className="stats-info text-[15px]">
                             {props[`stats`].map(
@@ -112,8 +108,8 @@ export default function Detail(props: Props): JSX.Element {
             <div className="capture-container px-4 pb-6">
                 {captured ? (
                     <div className="capture-info mx-auto rounded-[16px] shadow-detail-box p-[16px]">
-                        <h2 className="text-[18px] pb-[10px]">
-                            <b>Capture Information</b>
+                        <h2 className="text-[18px] pb-[10px] font-bold">
+                            Capture Information
                         </h2>
                         <div className="about-info text-[15px]">
                             {capturedPokemon[`nickname`] === `None` ? (
