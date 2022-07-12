@@ -71,6 +71,8 @@ export default function Modal(props: Props): JSX.Element {
         enableButton(true);
     };
 
+    console.log(props);
+
     return (
         <div className="modal flex flex-col items-center justify-center h-full">
             <div className="modal-contents w-[348px] px-[24px] py-[32px] bg-white rounded-[16px]">
