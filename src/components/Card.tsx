@@ -31,13 +31,7 @@ const Card = (props: Props): JSX.Element => {
             }}
         >
             {pokemonInfo.length === 0 ? (
-                <div className="placeholder-container">
-                    {pokemonInfo[`name`]}{' '}
-                    <img
-                        src={`https://via.placeholder.com/150`}
-                        alt={`placeholder`}
-                    />
-                </div>
+                <div className="placeholder">Loading...</div>
             ) : (
                 <div className="rounded-2xl shadow-detail-box overflow-hidden">
                     <div
