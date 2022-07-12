@@ -9,7 +9,6 @@ type Props = {
 };
 
 export default function ModalForm(props: Props): JSX.Element {
-    console.log(props);
     return (
         <div className="form-container">
             <form
