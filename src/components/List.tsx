@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import Card from './Card';
 import Detail from './Detail';
 import Header from './Header';
@@ -6,6 +6,9 @@ import Modal from './Modal';
 
 type Props = {
     pokemonList: Array<Object>;
+    homePageList: Array<Object>;
+    showHomePage: (setPokemonList: SetStateAction<Array<Object>>) => void;
+    showPrevious: (setShowPrevious: SetStateAction<Boolean>) => void;
 };
 
 export default function List(props: Props): JSX.Element {
@@ -37,7 +40,12 @@ export default function List(props: Props): JSX.Element {
         <div className="main-container pb-10 flex">
             <div className="detail-list-container flex">
                 <div className="header-list-container-lg px-10">
-                    <Header catchButton={true} />
+                    <Header
+                        catchButton={true}
+                        homePageList={props.homePageList}
+                        showHomePage={props.showHomePage}
+                        showPrevious={props.showPrevious}
+                    />
                     <div className="card-container flex flex-row flex-wrap justify-between gap-6 xl:gap-10">
                         {!pokemonList ? (
                             <div>No Pokemon List to Render</div>

@@ -8,11 +8,13 @@ export default function Home(): JSX.Element {
     const [pokemonList, setPokemonList] = useState<Array<Object>>([]);
     const [nextPokemonList, setNextPokemonList] = useState<Array<Object>>([]);
     const [showPrevious, setShowPrevious] = useState<Boolean>(false);
+    const [homePage, setHomePage] = useState<Array<Object>>([]);
 
     useEffect(() => {
         const getData = async () => {
             const fetchPokemon = await getPokemonData(baseURL);
             setPokemonList(fetchPokemon);
+            setHomePage(fetchPokemon);
         };
 
         if (pokemonList.length === 0) {
@@ -39,7 +41,12 @@ export default function Home(): JSX.Element {
 
     return (
         <div className="home-container pb-10">
-            <List pokemonList={pokemonList[`results`]} />
+            <List
+                pokemonList={pokemonList[`results`]}
+                showHomePage={setPokemonList}
+                homePageList={homePage}
+                showPrevious={setShowPrevious}
+            />
             <div className="pagination-button-container flex justify-around text-center text-[28px]">
                 {showPrevious ? (
                     <div className="previous-button-container font-bold">

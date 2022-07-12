@@ -1,11 +1,25 @@
+import { SetStateAction } from 'react';
+import { Link } from 'react-router-dom';
 import pokedexLogo from '../assets/pokedex_logo.png';
 import pokeball from '../assets/pokeball.png';
-import { Link } from 'react-router-dom';
 
-export default function Header(props: { catchButton: boolean }): JSX.Element {
+type Props = {
+    catchButton: boolean;
+    homePageList?: Array<Object>;
+    showHomePage?: (setPokemonList: SetStateAction<Array<Object>>) => void;
+    showPrevious?: (setShowPrevious: SetStateAction<Boolean>) => void;
+};
+
+export default function Header(props: Props): JSX.Element {
     return (
         <div className="header flex flex-row justify-between mt-[48px] mb-[36px]">
-            <Link to="/">
+            <Link
+                to="/"
+                onClick={() => {
+                    props.showHomePage!(props.homePageList!);
+                    props.showPrevious!(false);
+                }}
+            >
                 <div className="logo">
                     <img src={pokedexLogo} alt="pokemon-logo" />
                 </div>
