@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getPokemonData } from '../utils/request';
 import List from '../components/List';
 
-const baseURL = `https://pokeapi.co/api/v2/pokemon?limit=30&offset=0`;
+const baseURL: string = `https://pokeapi.co/api/v2/pokemon?limit=30&offset=0`;
 
 export default function Home(): JSX.Element {
     const [pokemonList, setPokemonList] = useState<Array<Object>>([]);
@@ -42,15 +42,15 @@ export default function Home(): JSX.Element {
             <List pokemonList={pokemonList[`results`]} />
             <div className="pagination-button-container flex justify-around text-center text-[28px]">
                 {showPrevious ? (
-                    <div className="previous-button-container">
+                    <div className="previous-button-container font-bold">
                         <button onClick={() => updatePreviousPokemonList()}>
-                            <b>Previous Page</b>
+                            Previous Page
                         </button>
                     </div>
                 ) : null}
-                <div className="next-button-container">
+                <div className="next-button-container font-bold">
                     <button onClick={() => updatePokemonList()}>
-                        <b>Next Page</b>
+                        Next Page
                     </button>
                 </div>
             </div>

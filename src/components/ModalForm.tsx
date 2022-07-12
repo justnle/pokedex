@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 
 type Props = {
     capture: (date: string, level: string, event: React.SyntheticEvent) => void;
@@ -8,8 +8,61 @@ type Props = {
     buttonState: boolean;
 };
 
+type Inputs = {
+    type: string;
+    id: string;
+    name: string;
+    minLength: number | undefined;
+    maxLength: number | undefined;
+    placeholder: string;
+    defaultValue: string | undefined;
+    onClick: MouseEventHandler<HTMLInputElement> | undefined;
+    disabled: boolean;
+    required: boolean;
+};
+
 export default function ModalForm(props: Props): JSX.Element {
-    console.log(props);
+    const inputFields: Inputs[] = [
+        {
+            type: `text`,
+            id: `nickname`,
+            name: `nickname`,
+            minLength: 1,
+            maxLength: 12,
+            placeholder: `Nickname`,
+            defaultValue: undefined,
+            onClick: props.autoFill,
+            disabled: false,
+            required: false
+        },
+        {
+            type: `text`,
+            id: `captured-date`,
+            name: `captured-date`,
+            minLength: undefined,
+            maxLength: undefined,
+            placeholder: `Captured Date`,
+            defaultValue: props.captured_date
+                ? props.captured_date.slice(0, 10)
+                : ``,
+            onClick: undefined,
+            disabled: true,
+            required: true
+        },
+        {
+            type: `text`,
+            id: `captured-level`,
+            name: `captured-level`,
+            minLength: undefined,
+            maxLength: undefined,
+            placeholder: `Captured Level`,
+            defaultValue: props.captured_level ? props.captured_level : ``,
+            onClick: undefined,
+            disabled: true,
+            required: true
+        }
+    ];
+
     return (
         <div className="form-container">
             <form
@@ -22,42 +75,24 @@ export default function ModalForm(props: Props): JSX.Element {
                 }}
             >
                 <div className="capture-details py-5">
-                    <input
-                        type="text"
-                        id="nickname"
-                        name="nickname"
-                        minLength={1}
-                        maxLength={12}
-                        placeholder="Nickname"
-                        className="w-full rounded-md my-1 pl-2 py-1 text-[18px] border border-black"
-                        onClick={props.autoFill}
-                    ></input>
-                    <input
-                        type="text"
-                        id="captured-date"
-                        name="captured-date"
-                        placeholder="Captured Date"
-                        defaultValue={
-                            props.captured_date
-                                ? props.captured_date.slice(0, 10)
-                                : ``
-                        }
-                        className="w-full rounded-md my-1 pl-2 py-1 text-[18px] border border-black"
-                        disabled
-                        required
-                    ></input>
-                    <input
-                        type="text"
-                        id="captured-level"
-                        name="captured-level"
-                        placeholder="Captured Level"
-                        defaultValue={
-                            props.captured_level ? props.captured_level : ``
-                        }
-                        className="w-full rounded-md my-1 pl-2 py-1 text-[18px] border border-black"
-                        disabled
-                        required
-                    ></input>
+                    {inputFields.map((input: Inputs, index: number) => {
+                        return (
+                            <input
+                                type="text"
+                                id={input.id}
+                                name={input.name}
+                                minLength={input.minLength}
+                                maxLength={input.maxLength}
+                                placeholder={input.placeholder}
+                                defaultValue={input.defaultValue}
+                                onClick={input.onClick}
+                                disabled={input.disabled}
+                                required={input.required}
+                                className="w-full rounded-md my-1 pl-2 py-1 text-[18px] border border-black"
+                                key={`input-${index}`}
+                            ></input>
+                        );
+                    })}
                 </div>
                 <div className="modal-capture-button-container flex justify-center h-[53px]">
                     <button
