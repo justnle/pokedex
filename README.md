@@ -40,7 +40,6 @@ This application is built with:
 Dependencies:
 
 -   [axios](https://axios-http.com/docs/intro) - HTTP Client for Node.js
--   [react-infinite-scroll-component](https://github.com/ankeetmaini/react-infinite-scroll-component#readmehttps://github.com/ankeetmaini/react-infinite-scroll-component#readme) - Infinite scrolling component
 -   [react-router-dom](https://reactrouter.com/docs/en/v6) - Client-side routing
 -   [tailwindcss](https://tailwindcss.com/docs/installation) - CSS framework
 
