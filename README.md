@@ -14,20 +14,20 @@ A Pokedex web application that displays a list of Pokemon in National Pokedex or
 
 The homepage displays a list of 30 Pokemon with the Pokemon's name, picture, dex number and type(s).
 
-![Pokedex Homepage](/pokedex/src/assets/screenshots/homepage.png)
+![Pokedex Homepage](src/assets/screenshots/homepage.png)
 
 Clicking on a Pokemon card will bring up a detail card on the right side of the screen. There, you can find more information about the Pokemon's weight, height and stats. There is also a capture button where the user can capture the Pokemon if it has not been previously captured. If the Pokemon is already captured, the details of the captured Pokemon will be shown instead.
 
-![Pokedex detail](/pokedex/src/assets/screenshots/detail.png)
-![Captured detail](/pokedex/src/assets/screenshots/detail_captured.png)
+![Pokedex detail](src/assets/screenshots/detail.png)
+![Captured detail](src/assets/screenshots/detail_captured.png)
 
 Clicking on the capture button will bring up a modal that asks the user for an optional nickname, with a minimum length of one and a maximum length of twelve characters. The capture button is disabled by default and is only enabled after clicking on the 'Nickname' input field, as the date (YYYY-MM-DD) and level will autofill.
 
-![Modal](/pokedex/src/assets/screenshots/modal_fill.png)
+![Modal](src/assets/screenshots/modal_fill.png)
 
 The user can then head to the Captured page where all of the caught Pokemon will be displayed. The page displays the Pokemon's name, type(s), nickname (if given, otherwise it will be displayed as 'None'), captured date (Month DD, YYYY), and captured level.
 
-![Captured page](/pokedex/src/assets/screenshots/captured.png)
+![Captured page](src/assets/screenshots/captured.png)
 
 ## Technologies
 
