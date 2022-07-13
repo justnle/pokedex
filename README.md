@@ -8,7 +8,26 @@ A Pokedex web application that displays a list of Pokemon in National Pokedex or
 2. In your text terminal, `cd` into your the repositorys directory and run `npm i`
 3. Then start the application by running `npm start`
 4. Your browser will launch the application at [http://localhost:3000/](http://localhost:3000/)
-5. The deployed application can be found at [](http://pokedex)
+5. The deployed application can be found at [https://jl-pokedex.herokuapp.com/](https://jl-pokedex.herokuapp.com/)
+
+## Screenshots
+
+The homepage displays a list of 30 Pokemon with the Pokemon's name, picture, dex number and type(s).
+
+![Pokedex Homepage](/pokedex/src/assets/screenshots/homepage.png)
+
+Clicking on a Pokemon card will bring up a detail card on the right side of the screen. There, you can find more information about the Pokemon's weight, height and stats. There is also a capture button where the user can capture the Pokemon if it has not been previously captured. If the Pokemon is already captured, the details of the captured Pokemon will be shown instead.
+
+![Pokedex detail](/pokedex/src/assets/screenshots/detail.png)
+![Captured detail](/pokedex/src/assets/screenshots/detail_captured.png)
+
+Clicking on the capture button will bring up a modal that asks the user for an optional nickname, with a minimum length of one and a maximum length of twelve characters. The capture button is disabled by default and is only enabled after clicking on the 'Nickname' input field, as the date (YYYY-MM-DD) and level will autofill.
+
+![Modal](/pokedex/src/assets/screenshots/modal_fill.png)
+
+The user can then head to the Captured page where all of the caught Pokemon will be displayed. The page displays the Pokemon's name, type(s), nickname (if given, otherwise it will be displayed as 'None'), captured date (Month DD, YYYY), and captured level.
+
+![Captured page](/pokedex/src/assets/screenshots/captured.png)
 
 ## Technologies
 
