@@ -1,23 +1,21 @@
 import { useState, useEffect } from 'react';
-import { getCachedPokemonData, getPokemonData } from '../utils/request';
+import { getPokemonData } from '../utils/request';
 import { typeColor } from '../utils/backgrounds';
 
-const Card = (props: any) => {
+type Props = {
+    url: string;
+    name: string;
+    pokemonInfo: (data: Object) => void;
+    onClick: () => void;
+};
+
+const Card = (props: Props): JSX.Element => {
     const [pokemonInfo, setPokemonInfo] = useState<Array<Object>>([]);
 
     useEffect(() => {
         const fetchPokemonData = async () => {
-            if (props.useCache) {
-                console.log(`using cache`);
-                const cachedPokemonData = getCachedPokemonData(props.url);
-
-                if (cachedPokemonData) {
-                    setPokemonInfo(cachedPokemonData);
-                }
-            } else {
-                const getInfo = await getPokemonData(props.url, props.useCache);
-                setPokemonInfo(getInfo);
-            }
+            const getInfo = await getPokemonData(props.url);
+            setPokemonInfo(getInfo);
         };
 
         fetchPokemonData();
@@ -25,7 +23,7 @@ const Card = (props: any) => {
     }, []);
 
     return (
-        <div
+        <button
             className="pokemon-card w-[333px]"
             onClick={() => {
                 props.pokemonInfo(pokemonInfo);
@@ -33,13 +31,7 @@ const Card = (props: any) => {
             }}
         >
             {pokemonInfo.length === 0 ? (
-                <div className="placeholder-container">
-                    {pokemonInfo[`name`]}{' '}
-                    <img
-                        src={`https://via.placeholder.com/150`}
-                        alt={`placeholder`}
-                    />
-                </div>
+                <div className="placeholder">Loading...</div>
             ) : (
                 <div className="rounded-2xl shadow-detail-box overflow-hidden">
                     <div
@@ -62,12 +54,10 @@ const Card = (props: any) => {
                         />
                     </div>
                     <div className="pokemon-info flex flex-col items-start pt-[8px] pr-[8px] pb-[16px] pl-[16px]">
-                        <div className="pokemon-name flex self-stretch text-[28px] text-dark-gray">
-                            <b>
-                                #{pokemonInfo[`id`].toString().padStart(3, '0')}{' '}
-                                {pokemonInfo[`name`].charAt(0).toUpperCase() +
-                                    props.name.slice(1)}
-                            </b>
+                        <div className="pokemon-name flex self-stretch text-[28px] text-dark-gray font-bold">
+                            #{pokemonInfo[`id`].toString().padStart(3, '0')}{' '}
+                            {pokemonInfo[`name`].charAt(0).toUpperCase() +
+                                props.name.slice(1)}
                         </div>
                         <div className="pokemon-type flex flex-row self-stretch text-[24px] text-medium-gray">
                             {pokemonInfo[`types`]
@@ -83,7 +73,7 @@ const Card = (props: any) => {
                     </div>
                 </div>
             )}
-        </div>
+        </button>
     );
 };
 

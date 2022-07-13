@@ -1,7 +1,27 @@
+import React, { useState } from 'react';
 import { toISOStringWithTimezone } from '../utils/date';
+import ModalForm from './ModalForm';
 
-export default function Modal(props: { onClick: () => void }) {
-    const capturePokemon = () => {
+type Props = {
+    onClick: () => void;
+    props?: Object;
+};
+
+export default function Modal(props: Props): JSX.Element {
+    const [fillModal, setFillModal] = useState({
+        captured_date: '',
+        captured_level: ''
+    });
+
+    const [button, enableButton] = useState(false);
+
+    const capturePokemon = (
+        time: string,
+        level: string,
+        event: React.SyntheticEvent
+    ) => {
+        event.preventDefault();
+
         const nicknameElement = document.getElementById(
             `nickname`
         ) as HTMLInputElement;
@@ -12,8 +32,8 @@ export default function Modal(props: { onClick: () => void }) {
                 nicknameElement.value.length > 1
                     ? nicknameElement.value
                     : `None`,
-            captured_date: toISOStringWithTimezone(new Date()),
-            captured_level: Math.floor(Math.random() * 101),
+            captured_date: time,
+            captured_level: level,
             pokemon_detail: props
         };
 
@@ -38,51 +58,35 @@ export default function Modal(props: { onClick: () => void }) {
         props.onClick();
     };
 
+    const autoFill = () => {
+        const date = toISOStringWithTimezone(new Date());
+
+        if (fillModal.captured_date === '' || fillModal.captured_level === '') {
+            setFillModal({
+                captured_date: date,
+                captured_level: Math.floor(Math.random() * 101).toString()
+            });
+        }
+
+        enableButton(true);
+    };
+
     return (
-        <div className="modal flex flex-col items-center justify-center h-screen">
+        <div className="modal flex flex-col items-center justify-center h-full">
             <div className="modal-contents w-[348px] px-[24px] py-[32px] bg-white rounded-[16px]">
                 <div className="pokemon-name">
-                    <h2 className="text-[32px]">
-                        <b className="font-semibold">
-                            Capturing{' '}
-                            {props[`name`].charAt(0).toUpperCase() +
-                                props[`name`].slice(1)}
-                        </b>
+                    <h2 className="text-[32px] font-[590]">
+                        Capturing{' '}
+                        {props[`name`].charAt(0).toUpperCase() +
+                            props[`name`].slice(1)}
                     </h2>
                 </div>
-                <div className="capture-details py-5">
-                    <input
-                        type="text"
-                        id="nickname"
-                        name="nickname"
-                        minLength={1}
-                        maxLength={12}
-                        placeholder="Nickname"
-                        className="w-full rounded-md my-1 pl-2 py-1 text-[18px] border border-black"
-                    ></input>
-                    <input
-                        type="text"
-                        id="capture-date"
-                        name="capture-date"
-                        placeholder="Captured Date"
-                        className="w-full rounded-md my-1 pl-2 py-1 text-[18px] border border-black"
-                        disabled
-                    ></input>
-                    <input
-                        type="text"
-                        id="capture-level"
-                        name="capture-level"
-                        placeholder="Captured Level"
-                        className="w-full rounded-md my-1 pl-2 py-1 text-[18px] border border-black"
-                        disabled
-                    ></input>
-                </div>
-                <div
-                    className="capture-button bg-red-500 rounded-[100px] text-white text-[18px] font-semibold"
-                    onClick={() => capturePokemon()}
-                >
-                    <h2 className="text-center py-3">Capture</h2>
-                </div>
+                <ModalForm
+                    capture={capturePokemon}
+                    autoFill={autoFill}
+                    {...fillModal}
+                    buttonState={!button}
+                />
             </div>
         </div>
     );

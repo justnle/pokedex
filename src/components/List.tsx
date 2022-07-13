@@ -1,28 +1,51 @@
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import Card from './Card';
 import Detail from './Detail';
 import Header from './Header';
 import Modal from './Modal';
 
-export default function List(props: any) {
+type Props = {
+    pokemonList: Array<Object>;
+    homePageList: Array<Object>;
+    showHomePage: (setPokemonList: SetStateAction<Array<Object>>) => void;
+    showPrevious: (setShowPrevious: SetStateAction<Boolean>) => void;
+};
+
+export default function List(props: Props): JSX.Element {
     const [pokemonList, setPokemonList] = useState<Array<Object>>([]);
     const [showDetail, setShowDetail] = useState<Boolean>(false);
     const [detailInfo, setDetailInfo] = useState<Object>({});
     const [showModal, setShowModal] = useState<Boolean>(false);
+    const [capturedPokemon, setCapturedPokemon] = useState([]);
 
     useEffect(() => {
         setPokemonList(props.pokemonList);
-    }, [props.pokemonList]);
+
+        const getCaptureData = () => {
+            const capturedPokemonList = localStorage.getItem(`capturedPokemon`);
+
+            if (capturedPokemonList) {
+                setCapturedPokemon(JSON.parse(capturedPokemonList));
+            }
+        };
+
+        getCaptureData();
+    }, [props.pokemonList, showModal]);
 
     const getDetailInfo = (pokemonInfo: Object) => {
         setDetailInfo(pokemonInfo);
     };
 
     return (
-        <div className="page-container flex relative">
-            <div className="detail-list-container flex flex-row">
+        <div className="main-container pb-10 flex">
+            <div className="detail-list-container flex">
                 <div className="header-list-container-lg px-10">
-                    <Header />
+                    <Header
+                        catchButton={true}
+                        homePageList={props.homePageList}
+                        showHomePage={props.showHomePage}
+                        showPrevious={props.showPrevious}
+                    />
                     <div className="card-container flex flex-row flex-wrap justify-between gap-6 xl:gap-10">
                         {!pokemonList ? (
                             <div>No Pokemon List to Render</div>
@@ -32,7 +55,6 @@ export default function List(props: any) {
                                     <Card
                                         key={`${pokemon[`name`]}-${index}`}
                                         {...pokemon}
-                                        useCache={false}
                                         pokemonInfo={getDetailInfo}
                                         onClick={() => {
                                             setShowDetail(true);
@@ -45,21 +67,45 @@ export default function List(props: any) {
                 </div>
                 {showDetail ? (
                     <div
-                        className="detail-container pr-8"
-                        onClick={() => setShowDetail(false)}
+                        className="detail-container m-height-[1px]"
+                        style={{ minWidth: '360px' }}
+                        onClick={(event) => {
+                            const button = document.querySelector(
+                                `.detail-capture-button`
+                            );
+
+                            if (event.target !== button) {
+                                setShowDetail(false);
+                            }
+                        }}
                     >
                         <Detail
-                            onClick={() => setShowModal(true)}
+                            onClick={() => {
+                                setShowModal(true);
+                                document.body.style.overflow = 'hidden';
+                            }}
                             {...detailInfo}
+                            captured={capturedPokemon}
                         />
                     </div>
                 ) : null}
             </div>
             {showModal ? (
-                <div className="modal-container absolute w-full h-full bg-black/60">
+                <div
+                    className="modal-container fixed top-0 w-full h-full bg-black/60"
+                    onClick={(event) => {
+                        const modal = document.querySelector(`.modal`);
+
+                        if (event.target === modal) {
+                            setShowModal(false);
+                            document.body.style.overflow = 'unset';
+                        }
+                    }}
+                >
                     <Modal
                         onClick={() => {
                             setShowModal(false);
+                            document.body.style.overflow = 'unset';
                         }}
                         {...detailInfo}
                     />
