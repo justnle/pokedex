@@ -64,7 +64,7 @@ export default function Modal(props: Props): JSX.Element {
         if (fillModal.captured_date === '' || fillModal.captured_level === '') {
             setFillModal({
                 captured_date: date,
-                captured_level: Math.floor(Math.random() * 101).toString()
+                captured_level: (Math.floor(Math.random() * 100) + 1).toString()
             });
         }
 
